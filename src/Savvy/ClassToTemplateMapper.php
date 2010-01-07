@@ -80,19 +80,19 @@ class Savvy_ClassToTemplateMapper implements Savvy_MapperInterface
      */
     function map($class)
     {
-        if (isset(static::$output_template[$class])) {
-            $class = static::$output_template[$class];
+        if (isset(self::$output_template[$class])) {
+            $class = self::$output_template[$class];
         }
         
-        $class = str_replace(array(static::$classname_replacement,
-                                   static::$directory_separator,
+        $class = str_replace(array(self::$classname_replacement,
+                                   self::$directory_separator,
                                    '\\'),
                              array('',
                                    DIRECTORY_SEPARATOR,
                                    DIRECTORY_SEPARATOR),
                              $class);
         
-        $templatefile = $class . static::$template_extension;
+        $templatefile = $class . self::$template_extension;
         
         return $templatefile;
     }
