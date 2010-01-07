@@ -13,7 +13,7 @@ $savvy = new Savvy();
 $savvy->addTemplatePath(__DIR__ . '/templates');
 
 // Display a simple string
-echo $savvy->render('<h1>Welcome to the Savant Demo</h1>');
+echo $savvy->render('<h1>Welcome to the Savvy Demo</h1>');
 
 // Display a string, in a custom template
 echo $savvy->render('mystring', 'StringView.tpl.php');
