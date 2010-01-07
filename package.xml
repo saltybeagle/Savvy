@@ -21,7 +21,7 @@ don't need to learn a new markup system.</description>
   <active>yes</active>
  </lead>
  <date>2010-01-07</date>
- <time>15:11:29</time>
+ <time>15:40:19</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -101,7 +101,7 @@ Package Savvy API release notes for version 0.1.0.</notes>
     <min>5.2.0</min>
    </php>
    <pearinstaller>
-    <min>2.0.0a1</min>
+    <min>1.4.0</min>
    </pearinstaller>
   </required>
  </dependencies>
