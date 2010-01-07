@@ -1,0 +1,5 @@
+Savvy is a powerful but lightweight object-oriented template system for PHP.
+
+Unlike other template systems, Savvy by default does not compile your
+templates into PHP; instead, it uses PHP itself as its template language so you
+don't need to learn a new markup system.
