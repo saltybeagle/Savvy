@@ -30,7 +30,7 @@ class Savvy_BasicFastCompiler implements Savvy_FastCompilerInterface
      * Compile a template.
      * 
      * @param string $name   Template to compile
-     * @param Main   $savvy Savant main object
+     * @param Main   $savvy Savvy main object
      *
      * @return string Name of the compiled template file.
      */

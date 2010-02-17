@@ -2,9 +2,9 @@
 
 /**
 * 
-* Abstract Savant3_Filter class.
+* Abstract Savvy_Filter class.
 * 
-* @package Savant3
+* @package Savvy
 * 
 * @author Paul M. Jones <pmjones@ciaweb.net>
 * 
@@ -16,12 +16,12 @@
 
 /**
 * 
-* Abstract Savant3_Filter class.
+* Abstract Savvy_Filter class.
 *
 * You have to extend this class for it to be useful; e.g., "class
-* Savant3_Filter_example extends Savant3_Filter".
+* Savvy_Filter_example extends Savvy_Filter".
 * 
-* @package Savant3
+* @package Savvy
 * 
 * @author Paul M. Jones <pmjones@ciaweb.net>
 * 
@@ -32,7 +32,7 @@ abstract class Savvy_FilterAbstract
     
     /**
     * 
-    * Optional reference to the calling Savant object.
+    * Optional reference to the calling Savvy object.
     * 
     * @access protected
     * 

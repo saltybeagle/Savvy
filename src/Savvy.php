@@ -195,7 +195,7 @@ class Savvy
     
     /**
     *
-    * Returns a copy of the Savant3 configuration parameters.
+    * Returns a copy of the Savvy configuration parameters.
     *
     * @access public
     * 
@@ -225,7 +225,7 @@ class Savvy
     * 
     * Sets a custom compiler/pre-processor callback for template sources.
     * 
-    * By default, Savant3 does not use a compiler; use this to set your
+    * By default, Savvy does not use a compiler; use this to set your
     * own custom compiler (pre-processor) for template sources.
     * 
     * @access public
@@ -429,7 +429,7 @@ class Savvy
             $path = explode(PATH_SEPARATOR, $path);
             
             // typically in path strings, the first one is expected
-            // to be searched first. however, Savant3 uses a stack,
+            // to be searched first. however, Savvy uses a stack,
             // so the first would be last.  reverse the path string
             // so that it behaves as expected with path strings.
             $path = array_reverse($path);
@@ -703,7 +703,7 @@ class Savvy
     *
     * Compiles a template and returns path to compiled script.
     * 
-    * By default, Savant does not compile templates, it uses PHP as the
+    * By default, Savvy does not compile templates, it uses PHP as the
     * markup language, so the "compiled" template is the same as the source
     * template.
     *
