@@ -1,4 +1,0 @@
-Port PEAR2_Templates_Savant to Savvy.
-
-* Always throw exceptions.
-* Never load files internally.

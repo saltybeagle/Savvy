@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-01-07</date>
- <time>15:40:19</time>
+ <date>2010-02-16</date>
+ <time>21:55:56</time>
  <version>
-  <release>0.1.0</release>
+  <release>0.1.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,10 +31,9 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Port PEAR2_Templates_Savant to Savvy.
+ <notes>Change a few remaining references from Savant to Savvy.
+Remove namespace characters for 5.2 compatibility.
 
-* Always throw exceptions.
-* Never load files internally.
 
 Package Savvy API release notes for version 0.1.0.</notes>
  <contents>
