@@ -1,6 +1,6 @@
 <?php
 /**
- * pear2\Templates\Savant\ObjectProxy
+ * Savvy_ObjectProxy
  *
  * PHP version 5
  *

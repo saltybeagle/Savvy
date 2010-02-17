@@ -686,7 +686,7 @@ class Savvy
             }
             $this->template = $this->getClassToTemplateMapper()->map($class);
         }
-        $current          = new \stdClass;
+        $current          = new stdClass;
         $current->file    = $this->findTemplateFile($this->template);
         $current->context = $mixed;
         $current->parent  = null;

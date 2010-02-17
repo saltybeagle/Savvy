@@ -1,5 +1,5 @@
 <?php
-class Savvy_UnexpecteValueException implements Savvy_Exception extends \UnexpectedValueException
+class Savvy_UnexpecteValueException implements Savvy_Exception extends UnexpectedValueException
 {
 
 }
