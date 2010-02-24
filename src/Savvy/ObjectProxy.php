@@ -104,6 +104,30 @@ class Savvy_ObjectProxy
     }
     
     /**
+     * Magic method for checking if a property is set.
+     * 
+     * @param string $var The var
+     * 
+     * @return bool
+     */
+    function __isset($var)
+    {
+        return isset($this->object->$var);
+    }
+    
+    /**
+     * Unset a property.
+     * 
+     * @param string $var The var
+     * 
+     * @return void
+     */
+    function __unset($var)
+    {
+        unset($this->object->$var);
+    }
+    
+    /**
      * Magic method which will call methods on the object.
      * 
      * @return mixed
