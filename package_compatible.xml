@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-02-24</date>
- <time>08:35:33</time>
+ <date>2010-03-03</date>
+ <time>08:37:23</time>
  <version>
-  <release>0.2.0</release>
+  <release>0.2.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,7 +31,7 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Add __isset and __unset to the ObjectProxy class.
+ <notes>Fix Savvy_UnexpectedValueException.
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
