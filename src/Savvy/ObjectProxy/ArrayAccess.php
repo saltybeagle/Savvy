@@ -4,7 +4,7 @@ class Savvy_ObjectProxy_ArrayAccess extends Savvy_ObjectProxy implements ArrayAc
 {
     function offsetExists($offset)
     {
-        return $this->object->offsetExists();
+        return $this->object->offsetExists($offset);
     }
     
     function offsetGet($offset)
