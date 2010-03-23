@@ -168,4 +168,12 @@ class Savvy_ObjectProxy
         }
         return new self($object, $savvy);
     }
+    
+    function __toString()
+    {
+        if (method_exists($this->object, '__toString')) {
+            return $this->savvy->escape($this->object->__toString());
+        }
+        throw new Savvy_BadMethodCallException('Object of class '.$this->__getClass().' could not be converted to string');
+    }
 }
