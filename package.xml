@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-03-23</date>
- <time>12:00:33</time>
+ <date>2010-04-01</date>
+ <time>09:30:57</time>
  <version>
-  <release>0.3.0</release>
+  <release>0.4.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,7 +31,7 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Add __toString() support for the object proxy
+ <notes>Add renderNULL method for rendering NULL variables or direct templates.
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
