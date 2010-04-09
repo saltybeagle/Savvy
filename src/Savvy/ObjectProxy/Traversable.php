@@ -2,6 +2,11 @@
 class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements Iterator
 {
 
+    function getIterator()
+    {
+        return $this->object;
+    }
+
     function next()
     {
         $this->object->next();
