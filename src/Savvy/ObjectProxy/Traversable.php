@@ -5,4 +5,9 @@ class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements Iterato
     {
         return $this->object;
     }
+
+    function current()
+    {
+        return self::filterVar(parent::current());
+    }
 }
