@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-04-09</date>
- <time>11:59:02</time>
+ <date>2010-04-22</date>
+ <time>11:29:15</time>
  <version>
-  <release>0.5.0</release>
+  <release>0.6.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,7 +31,9 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Filter iterated/traversable objects.
+ <notes>Feature Release
+* Allow direct access to the raw object when escaping. $context-&gt;getRawObject()
+* Implement Countable interface for auto-escaped context. count($context);
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
