@@ -145,7 +145,7 @@ class Savvy_ObjectProxy implements Countable
      */
     function __call($name, $arguments)
     {
-        return call_user_func_array(array($this->object, $name), $arguments);
+        return $this->filterVar(call_user_func_array(array($this->object, $name), $arguments));
     }
     
     /**

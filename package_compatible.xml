@@ -21,9 +21,9 @@ don't need to learn a new markup system.</description>
   <active>yes</active>
  </lead>
  <date>2010-04-22</date>
- <time>11:29:15</time>
+ <time>11:45:40</time>
  <version>
-  <release>0.6.0</release>
+  <release>0.6.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,9 +31,8 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Feature Release
-* Allow direct access to the raw object when escaping. $context-&gt;getRawObject()
-* Implement Countable interface for auto-escaped context. count($context);
+ <notes>Fix:
+* Also filter the return values of methods.
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
