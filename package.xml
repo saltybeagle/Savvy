@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-04-22</date>
- <time>11:45:40</time>
+ <date>2011-01-09</date>
+ <time>05:39:31</time>
  <version>
-  <release>0.6.1</release>
+  <release>0.7.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,8 +31,9 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Fix:
-* Also filter the return values of methods.
+ <notes>Feature Release:
+
+ - Add support for global variables, available in every template [saltybeagle]
 
 
 Package Savvy API release notes for version 0.1.0.</notes>

@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-04-22</date>
- <time>11:45:40</time>
+ <date>2011-01-09</date>
+ <time>05:39:31</time>
  <version>
-  <release>0.6.1</release>
+  <release>0.7.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,25 +31,26 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Fix:
-* Also filter the return values of methods.
+ <notes>Feature Release:
+
+ - Add support for global variables, available in every template [saltybeagle]
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
  <contents>
   <dir name="/">
-   <file role="test" name="test/Savvy/phpsavant.com/test_framework.php.inc"/>
-   <file role="test" name="test/Savvy/phpsavant.com/render/render/string.phpt"/>
-   <file role="test" name="test/Savvy/phpsavant.com/render/render/object.phpt"/>
-   <file role="test" name="test/Savvy/phpsavant.com/render/render/Foo.tpl.php"/>
-   <file role="test" name="test/Savvy/phpsavant.com/render/render/fastcompile.phpt"/>
-   <file role="test" name="test/Savvy/phpsavant.com/render/render/echostring.tpl.php"/>
-   <file role="test" name="test/Savvy/phpsavant.com/render/render/array.phpt"/>
-   <file role="test" name="test/Savvy/phpsavant.com/escape/escape/string.phpt"/>
-   <file role="test" name="test/Savvy/phpsavant.com/escape/escape/raw.tpl.php"/>
-   <file role="test" name="test/Savvy/phpsavant.com/escape/escape/object.phpt"/>
-   <file role="test" name="test/Savvy/phpsavant.com/escape/escape/Foo.tpl.php"/>
-   <file role="test" name="test/Savvy/phpsavant.com/escape/escape/echostring.tpl.php"/>
+   <file role="test" name="test/phpsavant.com/Savvy/test_framework.php.inc"/>
+   <file role="test" name="test/phpsavant.com/Savvy/render/render/string.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/render/render/object.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/render/render/Foo.tpl.php"/>
+   <file role="test" name="test/phpsavant.com/Savvy/render/render/fastcompile.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/render/render/echostring.tpl.php"/>
+   <file role="test" name="test/phpsavant.com/Savvy/render/render/array.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/escape/escape/string.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/escape/escape/raw.tpl.php"/>
+   <file role="test" name="test/phpsavant.com/Savvy/escape/escape/object.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/escape/escape/Foo.tpl.php"/>
+   <file role="test" name="test/phpsavant.com/Savvy/escape/escape/echostring.tpl.php"/>
    <file role="php" name="php/Savvy/UnexpectedValueException.php"/>
    <file role="php" name="php/Savvy/TemplateException.php"/>
    <file role="php" name="php/Savvy/ObjectProxy/Traversable.php"/>
@@ -66,15 +67,15 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="php" name="php/Savvy/BadMethodCallException.php"/>
    <file role="php" name="php/Savvy/Autoload.php"/>
    <file role="php" name="php/Savvy.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/templates/examples/templates/StringView.tpl.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/templates/examples/templates/stdClass.tpl.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/templates/examples/templates/MyTemplate.tpl.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/examples/basic.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/PartialSeason.tpl.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/ListItem.tpl.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/index.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/BaseballTeam.tpl.php"/>
-   <file role="doc" name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/BaseballPlayer.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/templates/examples/templates/StringView.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/templates/examples/templates/stdClass.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/templates/examples/templates/MyTemplate.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/examples/basic.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/PartialSeason.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/ListItem.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/index.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/BaseballTeam.tpl.php"/>
+   <file role="doc" name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/BaseballPlayer.tpl.php"/>
   </dir>
  </contents>
  <dependencies>
@@ -89,15 +90,15 @@ Package Savvy API release notes for version 0.1.0.</notes>
  </dependencies>
  <phprelease>
   <filelist>
-   <install name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/BaseballPlayer.tpl.php" as="phpsavant.com/examples/baseball/examples/baseball/BaseballPlayer.tpl.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/BaseballTeam.tpl.php" as="phpsavant.com/examples/baseball/examples/baseball/BaseballTeam.tpl.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/index.php" as="phpsavant.com/examples/baseball/examples/baseball/index.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/ListItem.tpl.php" as="phpsavant.com/examples/baseball/examples/baseball/ListItem.tpl.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/baseball/examples/baseball/PartialSeason.tpl.php" as="phpsavant.com/examples/baseball/examples/baseball/PartialSeason.tpl.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/examples/basic.php" as="phpsavant.com/examples/examples/basic.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/templates/examples/templates/MyTemplate.tpl.php" as="phpsavant.com/examples/templates/examples/templates/MyTemplate.tpl.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/templates/examples/templates/stdClass.tpl.php" as="phpsavant.com/examples/templates/examples/templates/stdClass.tpl.php"/>
-   <install name="doc/Savvy/phpsavant.com/examples/templates/examples/templates/StringView.tpl.php" as="phpsavant.com/examples/templates/examples/templates/StringView.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/BaseballPlayer.tpl.php" as="Savvy/examples/baseball/examples/baseball/BaseballPlayer.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/BaseballTeam.tpl.php" as="Savvy/examples/baseball/examples/baseball/BaseballTeam.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/index.php" as="Savvy/examples/baseball/examples/baseball/index.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/ListItem.tpl.php" as="Savvy/examples/baseball/examples/baseball/ListItem.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/baseball/examples/baseball/PartialSeason.tpl.php" as="Savvy/examples/baseball/examples/baseball/PartialSeason.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/examples/basic.php" as="Savvy/examples/examples/basic.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/templates/examples/templates/MyTemplate.tpl.php" as="Savvy/examples/templates/examples/templates/MyTemplate.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/templates/examples/templates/stdClass.tpl.php" as="Savvy/examples/templates/examples/templates/stdClass.tpl.php"/>
+   <install name="doc/phpsavant.com/Savvy/examples/templates/examples/templates/StringView.tpl.php" as="Savvy/examples/templates/examples/templates/StringView.tpl.php"/>
    <install name="php/Savvy.php" as="Savvy.php"/>
    <install name="php/Savvy/Autoload.php" as="Savvy/Autoload.php"/>
    <install name="php/Savvy/BadMethodCallException.php" as="Savvy/BadMethodCallException.php"/>
@@ -114,18 +115,18 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <install name="php/Savvy/ObjectProxy/Traversable.php" as="Savvy/ObjectProxy/Traversable.php"/>
    <install name="php/Savvy/TemplateException.php" as="Savvy/TemplateException.php"/>
    <install name="php/Savvy/UnexpectedValueException.php" as="Savvy/UnexpectedValueException.php"/>
-   <install name="test/Savvy/phpsavant.com/escape/escape/echostring.tpl.php" as="phpsavant.com/escape/escape/echostring.tpl.php"/>
-   <install name="test/Savvy/phpsavant.com/escape/escape/Foo.tpl.php" as="phpsavant.com/escape/escape/Foo.tpl.php"/>
-   <install name="test/Savvy/phpsavant.com/escape/escape/object.phpt" as="phpsavant.com/escape/escape/object.phpt"/>
-   <install name="test/Savvy/phpsavant.com/escape/escape/raw.tpl.php" as="phpsavant.com/escape/escape/raw.tpl.php"/>
-   <install name="test/Savvy/phpsavant.com/escape/escape/string.phpt" as="phpsavant.com/escape/escape/string.phpt"/>
-   <install name="test/Savvy/phpsavant.com/render/render/array.phpt" as="phpsavant.com/render/render/array.phpt"/>
-   <install name="test/Savvy/phpsavant.com/render/render/echostring.tpl.php" as="phpsavant.com/render/render/echostring.tpl.php"/>
-   <install name="test/Savvy/phpsavant.com/render/render/fastcompile.phpt" as="phpsavant.com/render/render/fastcompile.phpt"/>
-   <install name="test/Savvy/phpsavant.com/render/render/Foo.tpl.php" as="phpsavant.com/render/render/Foo.tpl.php"/>
-   <install name="test/Savvy/phpsavant.com/render/render/object.phpt" as="phpsavant.com/render/render/object.phpt"/>
-   <install name="test/Savvy/phpsavant.com/render/render/string.phpt" as="phpsavant.com/render/render/string.phpt"/>
-   <install name="test/Savvy/phpsavant.com/test_framework.php.inc" as="phpsavant.com/test_framework.php.inc"/>
+   <install name="test/phpsavant.com/Savvy/escape/escape/echostring.tpl.php" as="Savvy/escape/escape/echostring.tpl.php"/>
+   <install name="test/phpsavant.com/Savvy/escape/escape/Foo.tpl.php" as="Savvy/escape/escape/Foo.tpl.php"/>
+   <install name="test/phpsavant.com/Savvy/escape/escape/object.phpt" as="Savvy/escape/escape/object.phpt"/>
+   <install name="test/phpsavant.com/Savvy/escape/escape/raw.tpl.php" as="Savvy/escape/escape/raw.tpl.php"/>
+   <install name="test/phpsavant.com/Savvy/escape/escape/string.phpt" as="Savvy/escape/escape/string.phpt"/>
+   <install name="test/phpsavant.com/Savvy/render/render/array.phpt" as="Savvy/render/render/array.phpt"/>
+   <install name="test/phpsavant.com/Savvy/render/render/echostring.tpl.php" as="Savvy/render/render/echostring.tpl.php"/>
+   <install name="test/phpsavant.com/Savvy/render/render/fastcompile.phpt" as="Savvy/render/render/fastcompile.phpt"/>
+   <install name="test/phpsavant.com/Savvy/render/render/Foo.tpl.php" as="Savvy/render/render/Foo.tpl.php"/>
+   <install name="test/phpsavant.com/Savvy/render/render/object.phpt" as="Savvy/render/render/object.phpt"/>
+   <install name="test/phpsavant.com/Savvy/render/render/string.phpt" as="Savvy/render/render/string.phpt"/>
+   <install name="test/phpsavant.com/Savvy/test_framework.php.inc" as="Savvy/test_framework.php.inc"/>
   </filelist>
  </phprelease>
 </package>

@@ -1,0 +1,3 @@
+Feature Release:
+
+ - Add support for global variables, available in every template [saltybeagle]
