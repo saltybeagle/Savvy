@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2011-01-09</date>
- <time>05:39:31</time>
+ <date>2011-01-12</date>
+ <time>14:27:46</time>
  <version>
-  <release>0.7.0</release>
+  <release>0.7.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,9 +31,10 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Feature Release:
+ <notes>Bugfix Release:
 
- - Add support for global variables, available in every template [saltybeagle]
+ - Improve escaping of arrays
+ - Add tests for globals
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -46,6 +47,11 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="test" name="test/phpsavant.com/Savvy/render/render/fastcompile.phpt"/>
    <file role="test" name="test/phpsavant.com/Savvy/render/render/echostring.tpl.php"/>
    <file role="test" name="test/phpsavant.com/Savvy/render/render/array.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/globals/globals/escape.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/globals/globals/escape.nestedarrays.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/globals/globals/escape.arrays.phpt"/>
+   <file role="test" name="test/phpsavant.com/Savvy/globals/globals/basic.tpl.php"/>
+   <file role="test" name="test/phpsavant.com/Savvy/globals/globals/basic.phpt"/>
    <file role="test" name="test/phpsavant.com/Savvy/escape/escape/string.phpt"/>
    <file role="test" name="test/phpsavant.com/Savvy/escape/escape/raw.tpl.php"/>
    <file role="test" name="test/phpsavant.com/Savvy/escape/escape/object.phpt"/>
@@ -120,6 +126,11 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <install name="test/phpsavant.com/Savvy/escape/escape/object.phpt" as="Savvy/escape/escape/object.phpt"/>
    <install name="test/phpsavant.com/Savvy/escape/escape/raw.tpl.php" as="Savvy/escape/escape/raw.tpl.php"/>
    <install name="test/phpsavant.com/Savvy/escape/escape/string.phpt" as="Savvy/escape/escape/string.phpt"/>
+   <install name="test/phpsavant.com/Savvy/globals/globals/basic.phpt" as="Savvy/globals/globals/basic.phpt"/>
+   <install name="test/phpsavant.com/Savvy/globals/globals/basic.tpl.php" as="Savvy/globals/globals/basic.tpl.php"/>
+   <install name="test/phpsavant.com/Savvy/globals/globals/escape.arrays.phpt" as="Savvy/globals/globals/escape.arrays.phpt"/>
+   <install name="test/phpsavant.com/Savvy/globals/globals/escape.nestedarrays.phpt" as="Savvy/globals/globals/escape.nestedarrays.phpt"/>
+   <install name="test/phpsavant.com/Savvy/globals/globals/escape.phpt" as="Savvy/globals/globals/escape.phpt"/>
    <install name="test/phpsavant.com/Savvy/render/render/array.phpt" as="Savvy/render/render/array.phpt"/>
    <install name="test/phpsavant.com/Savvy/render/render/echostring.tpl.php" as="Savvy/render/render/echostring.tpl.php"/>
    <install name="test/phpsavant.com/Savvy/render/render/fastcompile.phpt" as="Savvy/render/render/fastcompile.phpt"/>

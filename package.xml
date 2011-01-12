@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2011-01-09</date>
- <time>05:39:31</time>
+ <date>2011-01-12</date>
+ <time>14:27:46</time>
  <version>
-  <release>0.7.0</release>
+  <release>0.7.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,9 +31,10 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Feature Release:
+ <notes>Bugfix Release:
 
- - Add support for global variables, available in every template [saltybeagle]
+ - Improve escaping of arrays
+ - Add tests for globals
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -83,6 +84,13 @@ Package Savvy API release notes for version 0.1.0.</notes>
      <file role="test" name="object.phpt"/>
      <file role="test" name="raw.tpl.php"/>
      <file role="test" name="string.phpt"/>
+    </dir>
+    <dir name="globals">
+     <file role="test" name="basic.phpt"/>
+     <file role="test" name="basic.tpl.php"/>
+     <file role="test" name="escape.arrays.phpt"/>
+     <file role="test" name="escape.nestedarrays.phpt"/>
+     <file role="test" name="escape.phpt"/>
     </dir>
     <dir name="render">
      <file role="test" name="array.phpt"/>
