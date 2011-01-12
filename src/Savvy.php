@@ -289,9 +289,7 @@ class Savvy
                     $value = $this->escape($value);
                     break;
                 case 'array':
-                    foreach ($value as $key=>$sub_value) {
-                        $value[$key] = $this->escape($sub_value);
-                    }
+                    $value = new Savvy_ObjectProxy_ArrayAccess(new ArrayIterator($value), $this);
                     break;
             }
         }

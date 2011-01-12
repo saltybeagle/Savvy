@@ -81,9 +81,11 @@ class Savvy_ObjectProxy implements Countable
             return self::factory($var, $this->savvy);
         case 'string':
         case 'int':
-        case 'bool':
         case 'double':
             return $this->savvy->escape($var);
+        case 'array':
+            return new Savvy_ObjectProxy_ArrayAccess(
+                        new ArrayIterator($var), $this->savvy);
         }
         return $var;
     }
