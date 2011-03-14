@@ -289,7 +289,7 @@ class Savvy
                     $value = $this->escape($value);
                     break;
                 case 'array':
-                    $value = new Savvy_ObjectProxy_ArrayAccess(new ArrayIterator($value), $this);
+                    $value = new Savvy_ObjectProxy_ArrayIterator($value, $this);
                     break;
             }
         }
@@ -769,6 +769,15 @@ class Savvy
         return $ret;
     }
 
+    protected function renderArrayAccess(ArrayAccess $array, $template = null)
+    {
+        $ret = '';
+        foreach ($array as $key => $element) {
+            $ret .= $this->render($element, $template);
+        }
+        return $ret;
+    }
+
     /**
      * Render an if else conditional template output.
      * 
@@ -799,9 +808,15 @@ class Savvy
      */
     protected function renderObject($object, $template = null)
     {
-        if ($this->__config['escape']
-            && !$object instanceof Savvy_ObjectProxy) {
-            $object = Savvy_ObjectProxy::factory($object, $this);
+        if ($this->__config['escape']) {
+
+            if (!$object instanceof Savvy_ObjectProxy) {
+                $object = Savvy_ObjectProxy::factory($object, $this);
+            }
+
+            if ($object instanceof Savvy_ObjectProxy_ArrayIterator) {
+                return $this->renderArrayAccess($object);
+            }
         }
         return $this->fetch($object, $template);
     }
