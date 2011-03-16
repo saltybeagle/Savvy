@@ -1,5 +1,5 @@
 <?php
-class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy implements Iterator, ArrayAccess, SeekableIterator, Countable 
+class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy_ArrayAccess implements Iterator, SeekableIterator, Countable 
 {
 
     /**
@@ -43,23 +43,4 @@ class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy implements Itera
         return $this->object->seek($offset);
     }
 
-    function offsetExists($offset)
-    {
-        return $this->object->offsetExists($offset);
-    }
-    
-    function offsetGet($offset)
-    {
-        return $this->filterVar($this->object->offsetGet($offset));
-    }
-    
-    function offsetSet($offset, $value)
-    {
-        $this->object->offsetSet($offset, $value);
-    }
-    
-    function offsetUnset($offset)
-    {
-        $this->object->offsetUnset($offset);
-    }
 }
