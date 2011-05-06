@@ -42,5 +42,4 @@ class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy_ArrayAccess impl
     {
         return $this->object->seek($offset);
     }
-
 }
