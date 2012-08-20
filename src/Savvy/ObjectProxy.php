@@ -78,6 +78,12 @@ class Savvy_ObjectProxy implements Countable
     {
         switch(gettype($var)) {
         case 'object':
+            if ($var instanceof ArrayIterator) {
+                return new Savvy_ObjectProxy_ArrayIterator($var, $this->savvy);
+            }
+            if ($var instanceof ArrayAccess) {
+                return new Savvy_ObjectProxy_ArrayAccess($var, $this->savvy);
+            }
             return self::factory($var, $this->savvy);
         case 'string':
         case 'int':
