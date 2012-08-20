@@ -44,7 +44,7 @@ class Savvy_ObjectProxy_ArrayObject
 
     public function key()
     {
-        return $this->object->key();
+        return $this->filterVar($this->object->key());
     }
 
     public function valid()
