@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2011-03-13</date>
- <time>22:54:47</time>
+ <date>2012-08-20</date>
+ <time>10:52:21</time>
  <version>
-  <release>0.7.2</release>
+  <release>0.7.3</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,9 +31,10 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Bugfix Release:
+ <notes>Improve support for proxying arrays:
 
- * Refactor auto-escaping for arrays to preserve standard array interaction. [saltybeagle]
+* Objects which implement ArrayIterator are now proxied using a compatible object
+* Ensure keys are proxied when returned from ArrayObject
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -57,7 +58,9 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <dir name="src" baseinstalldir="/">
     <dir name="Savvy">
      <dir name="ObjectProxy">
+      <file role="php" name="ArrayAccess.php"/>
       <file role="php" name="ArrayIterator.php"/>
+      <file role="php" name="ArrayObject.php"/>
       <file role="php" name="Traversable.php"/>
      </dir>
      <file role="php" name="Autoload.php"/>

@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2011-03-13</date>
- <time>22:54:47</time>
+ <date>2012-08-20</date>
+ <time>10:52:21</time>
  <version>
-  <release>0.7.2</release>
+  <release>0.7.3</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,9 +31,10 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Bugfix Release:
+ <notes>Improve support for proxying arrays:
 
- * Refactor auto-escaping for arrays to preserve standard array interaction. [saltybeagle]
+* Objects which implement ArrayIterator are now proxied using a compatible object
+* Ensure keys are proxied when returned from ArrayObject
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -59,7 +60,9 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <file role="php" name="php/Savvy/UnexpectedValueException.php"/>
    <file role="php" name="php/Savvy/TemplateException.php"/>
    <file role="php" name="php/Savvy/ObjectProxy/Traversable.php"/>
+   <file role="php" name="php/Savvy/ObjectProxy/ArrayObject.php"/>
    <file role="php" name="php/Savvy/ObjectProxy/ArrayIterator.php"/>
+   <file role="php" name="php/Savvy/ObjectProxy/ArrayAccess.php"/>
    <file role="php" name="php/Savvy/ObjectProxy.php"/>
    <file role="php" name="php/Savvy/MapperInterface.php"/>
    <file role="php" name="php/Savvy/FilterAbstract.php"/>
@@ -116,7 +119,9 @@ Package Savvy API release notes for version 0.1.0.</notes>
    <install name="php/Savvy/FilterAbstract.php" as="Savvy/FilterAbstract.php"/>
    <install name="php/Savvy/MapperInterface.php" as="Savvy/MapperInterface.php"/>
    <install name="php/Savvy/ObjectProxy.php" as="Savvy/ObjectProxy.php"/>
+   <install name="php/Savvy/ObjectProxy/ArrayAccess.php" as="Savvy/ObjectProxy/ArrayAccess.php"/>
    <install name="php/Savvy/ObjectProxy/ArrayIterator.php" as="Savvy/ObjectProxy/ArrayIterator.php"/>
+   <install name="php/Savvy/ObjectProxy/ArrayObject.php" as="Savvy/ObjectProxy/ArrayObject.php"/>
    <install name="php/Savvy/ObjectProxy/Traversable.php" as="Savvy/ObjectProxy/Traversable.php"/>
    <install name="php/Savvy/TemplateException.php" as="Savvy/TemplateException.php"/>
    <install name="php/Savvy/UnexpectedValueException.php" as="Savvy/UnexpectedValueException.php"/>
