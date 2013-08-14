@@ -2,32 +2,32 @@
 class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements Iterator
 {
 
-    function getIterator()
+    public function getIterator()
     {
         return $this->object;
     }
 
-    function next()
+    public function next()
     {
         $this->object->next();
     }
 
-    function key()
+    public function key()
     {
         return $this->object->key();
     }
 
-    function valid()
+    public function valid()
     {
         return $this->object->valid();
     }
 
-    function rewind()
+    public function rewind()
     {
         $this->object->rewind();
     }
 
-    function current()
+    public function current()
     {
         return $this->filterVar($this->object->current());
     }

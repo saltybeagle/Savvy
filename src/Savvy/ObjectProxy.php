@@ -42,14 +42,14 @@ class Savvy_ObjectProxy implements Countable
      * @var Savvy
      */
     protected $savvy;
-    
+
     /**
      * Construct a new object proxy
      *
      * @param mixed $object The object
-     * @param Main  $savvy The savvy templating system
+     * @param Main  $savvy  The savvy templating system
      */
-    function __construct($object, $savvy)
+    public function __construct($object, $savvy)
     {
         $this->object = $object;
         $this->savvy  = $savvy;
@@ -62,21 +62,21 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return mixed
      */
-    function __get($var)
+    public function __get($var)
     {
         return $this->filterVar($this->object->$var);
     }
-    
+
     /**
      * Returns a variable, after it has been filtered.
-     * 
+     *
      * @param mixed $var
-     * 
+     *
      * @return string|Savvy_ObjectProxy
      */
     protected function filterVar($var)
     {
-        switch(gettype($var)) {
+        switch (gettype($var)) {
         case 'object':
             if ($var instanceof ArrayIterator) {
                 return new Savvy_ObjectProxy_ArrayIterator($var, $this->savvy);
@@ -84,6 +84,7 @@ class Savvy_ObjectProxy implements Countable
             if ($var instanceof ArrayAccess) {
                 return new Savvy_ObjectProxy_ArrayAccess($var, $this->savvy);
             }
+
             return self::factory($var, $this->savvy);
         case 'string':
         case 'int':
@@ -95,6 +96,7 @@ class Savvy_ObjectProxy implements Countable
                 $this->savvy
             );
         }
+
         return $var;
     }
 
@@ -104,7 +106,7 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return mixed The raw object
      */
-    function getRawObject()
+    public function getRawObject()
     {
         return $this->object;
     }
@@ -114,12 +116,12 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return mixed
      */
-    function getRaw($var)
+    public function getRaw($var)
     {
         return $this->object->$var;
     }
 
-    function __set($var, $value)
+    public function __set($var, $value)
     {
         $this->object->$var = $value;
     }
@@ -131,7 +133,7 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return bool
      */
-    function __isset($var)
+    public function __isset($var)
     {
         return isset($this->object->$var);
     }
@@ -143,7 +145,7 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return void
      */
-    function __unset($var)
+    public function __unset($var)
     {
         unset($this->object->$var);
     }
@@ -153,7 +155,7 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return mixed
      */
-    function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
         return $this->filterVar(
             call_user_func_array(
@@ -171,7 +173,7 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return string
      */
-    function __getClass()
+    public function __getClass()
     {
         return get_class($this->object);
     }
@@ -180,7 +182,7 @@ class Savvy_ObjectProxy implements Countable
      * Constructs an ObjectProxy for the given object.
      *
      * @param mixed $object The object to proxy
-     * @param Main  $savvy The main savvy instance
+     * @param Main  $savvy  The main savvy instance
      *
      * @return Savvy_ObjectProxy
      */
@@ -195,10 +197,11 @@ class Savvy_ObjectProxy implements Countable
         if ($object instanceof ArrayIterator) {
             return new Savvy_ObjectProxy_ArrayIterator($object, $savvy);
         }
+
         return new self($object, $savvy);
     }
 
-    function __toString()
+    public function __toString()
     {
         if (method_exists($this->object, '__toString')) {
             return $this->savvy->escape($this->object->__toString());
@@ -215,7 +218,7 @@ class Savvy_ObjectProxy implements Countable
      *
      * @return int
      */
-    function count()
+    public function count()
     {
         return count($this->object);
     }

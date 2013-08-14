@@ -2,5 +2,5 @@
 
 interface Savvy_MapperInterface
 {
-    function map($name);
+    public function map($name);
 }

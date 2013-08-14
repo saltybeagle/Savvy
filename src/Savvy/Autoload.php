@@ -22,7 +22,7 @@ class Savvy_Autoload
     private $_namespace;
     private $_includePath;
     private $_namespaceSeparator = '\\';
- 
+
     /**
      * Creates a new <tt>SplClassLoader</tt> that loads classes of the
      * specified namespace.
@@ -38,7 +38,7 @@ class Savvy_Autoload
             $this->_includePath = dirname(dirname(__FILE__));
         }
     }
- 
+
     /**
      * Sets the namespace separator used by classes in the namespace of this class loader.
      *
@@ -48,7 +48,7 @@ class Savvy_Autoload
     {
         $this->_namespaceSeparator = $sep;
     }
- 
+
     /**
      * Gets the namespace seperator used by classes in the namespace of this class loader.
      *
@@ -58,7 +58,7 @@ class Savvy_Autoload
     {
         return $this->_namespaceSeparator;
     }
- 
+
     /**
      * Sets the base include path for all class files in the namespace of this class loader.
      *
@@ -68,7 +68,7 @@ class Savvy_Autoload
     {
         $this->_includePath = $includePath;
     }
- 
+
     /**
      * Gets the base include path for all class files in the namespace of this class loader.
      *
@@ -78,7 +78,7 @@ class Savvy_Autoload
     {
         return $this->_includePath;
     }
- 
+
     /**
      * Sets the file extension of class files in the namespace of this class loader.
      *
@@ -88,7 +88,7 @@ class Savvy_Autoload
     {
         $this->_fileExtension = $fileExtension;
     }
- 
+
     /**
      * Gets the file extension of class files in the namespace of this class loader.
      *
@@ -98,7 +98,7 @@ class Savvy_Autoload
     {
         return $this->_fileExtension;
     }
- 
+
     /**
      * Installs this class loader on the SPL autoload stack.
      */
@@ -106,7 +106,7 @@ class Savvy_Autoload
     {
         spl_autoload_register(array($this, 'loadClass'));
     }
- 
+
     /**
      * Uninstalls this class loader from the SPL autoloader stack.
      */
@@ -114,11 +114,11 @@ class Savvy_Autoload
     {
         spl_autoload_unregister(array($this, 'loadClass'));
     }
- 
+
     /**
      * Loads the given class or interface.
      *
-     * @param string $className The name of the class to load.
+     * @param  string $className The name of the class to load.
      * @return void
      */
     public function loadClass($className)

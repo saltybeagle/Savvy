@@ -3,19 +3,19 @@ class Savvy_BasicFastCompiler implements Savvy_FastCompilerInterface
 {
     /**
      * Directory where compiled templates will be stored
-     * 
+     *
      * @var string
      */
     protected $compiledtemplatedir;
 
     /**
      * Constructor for the BasicFastCompiler
-     * 
+     *
      * @param string $compiledtemplatedir Where to store compiled templates
-     * 
+     *
      * @throws UnexpectedValueException
      */
-    function __construct($compiledtemplatedir)
+    public function __construct($compiledtemplatedir)
     {
         $this->compiledtemplatedir = realpath($compiledtemplatedir);
         if (!$this->compiledtemplatedir && !is_writable($this->compiledtemplatedir)) {
@@ -28,13 +28,13 @@ class Savvy_BasicFastCompiler implements Savvy_FastCompilerInterface
 
     /**
      * Compile a template.
-     * 
-     * @param string $name   Template to compile
+     *
+     * @param string $name  Template to compile
      * @param Main   $savvy Savvy main object
      *
      * @return string Name of the compiled template file.
      */
-    function compile($name, $savvy)
+    public function compile($name, $savvy)
     {
         $cname = $this->compiledtemplatedir . md5($name);
         if (file_exists($cname)) {
@@ -46,6 +46,7 @@ class Savvy_BasicFastCompiler implements Savvy_FastCompilerInterface
         $a = "<?php return '" . str_replace(array('<?php echo', '?>'), array('\' . ', ' . \''), $a) . "';";
         file_put_contents($cname, $a);
         touch($cname, filemtime($name));
+
         return $cname;
     }
 }

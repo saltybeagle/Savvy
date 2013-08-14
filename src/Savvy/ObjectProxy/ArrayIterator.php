@@ -8,7 +8,7 @@ class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy implements Itera
      * @param array $array  The array
      * @param Main  $savant The savant templating system
      */
-    function __construct($array, $savvy)
+    public function __construct($array, $savvy)
     {
         if (!($array instanceof ArrayIterator)) {
             $array = new ArrayIterator($array);
@@ -16,52 +16,52 @@ class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy implements Itera
         parent::__construct($array, $savvy);
     }
 
-    function current()
+    public function current()
     {
         return $this->filterVar($this->object->current());
     }
 
-    function next()
+    public function next()
     {
         return $this->object->next();
     }
 
-    function key()
+    public function key()
     {
         return $this->filterVar($this->object->key());
     }
 
-    function valid()
+    public function valid()
     {
         return $this->object->valid();
     }
 
-    function rewind()
+    public function rewind()
     {
         return $this->object->rewind();
     }
 
-    function seek($offset)
+    public function seek($offset)
     {
         return $this->object->seek($offset);
     }
 
-    function offsetExists($offset)
+    public function offsetExists($offset)
     {
         return $this->object->offsetExists($offset);
     }
 
-    function offsetGet($offset)
+    public function offsetGet($offset)
     {
         return $this->filterVar($this->object->offsetGet($offset));
     }
 
-    function offsetSet($offset, $value)
+    public function offsetSet($offset, $value)
     {
         $this->object->offsetSet($offset, $value);
     }
 
-    function offsetUnset($offset)
+    public function offsetUnset($offset)
     {
         $this->object->offsetUnset($offset);
     }
