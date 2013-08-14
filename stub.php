@@ -30,9 +30,9 @@ try {
 }
 function PEAR2_Templates_Savant_autoload($class)
 {
-    $class = str_replace('_', '\', $class);
-    if (file_exists('phar://' . __FILE__ . '/PEAR2_Templates_Savant-0.1.0/php/' . implode('/', explode('\', $class)) . '.php')) {
-        include 'phar://' . __FILE__ . '/PEAR2_Templates_Savant-0.1.0/php/' . implode('/', explode('\', $class)) . '.php';
+    $class = str_replace('_', '\\', $class);
+    if (file_exists('phar://' . __FILE__ . '/PEAR2_Templates_Savant-0.1.0/php/' . implode('/', explode('\\', $class)) . '.php')) {
+        include 'phar://' . __FILE__ . '/PEAR2_Templates_Savant-0.1.0/php/' . implode('/', explode('\\', $class)) . '.php';
     }
 }
 spl_autoload_register("PEAR2_Templates_Savant_autoload");
