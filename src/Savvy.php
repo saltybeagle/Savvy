@@ -262,14 +262,25 @@ class Savvy
 
     /**
      * Add a global variable which will be available inside every template
+     * 
+     * Inside templates, reference the global using the name passed
+     * <code>
+     * $savvy->addGlobal('formHelper', new FormHelper());
+     * </code>
+     * 
+     * Sample template, Form.tpl.php
+     * <code>
+     * echo $formHelper->renderInput('name');
+     * </code>
      *
      * @param string $var   The global variable name
-     * @param mixed  $value The value
+     * @param mixed  $value The value or variable to expose globally
      *
      * @return void
      */
     public function addGlobal($name, $value)
     {
+        // disallow specific variable names, these are reserved variables
         switch ($name) {
             case 'context':
             case 'parent':
@@ -279,6 +290,7 @@ class Savvy
                 throw new Savvy_BadMethodCallException('Invalid global variable name');
         }
 
+        // if output is currently escaped, make sure the global is escaped
         if ($this->__config['escape']) {
             switch (gettype($value)) {
                 case 'object':
