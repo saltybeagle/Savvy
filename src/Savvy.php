@@ -292,24 +292,43 @@ class Savvy
 
         // if output is currently escaped, make sure the global is escaped
         if ($this->__config['escape']) {
-            switch (gettype($value)) {
-                case 'object':
-                    if (!$value instanceof Savvy_ObjectProxy) {
-                        $value = Savvy_ObjectProxy::factory($value, $this);
-                    }
-                    break;
-                case 'string':
-                case 'int':
-                case 'double':
-                    $value = $this->escape($value);
-                    break;
-                case 'array':
-                    $value = new Savvy_ObjectProxy_ArrayIterator($value, $this);
-                    break;
-            }
+            $value = $this->filterVar($value);
         }
 
         $this->globals[$name] = $value;
+    }
+
+    /**
+     * Filter a variable of unknown type
+     *
+     * @param mixed $var The variable to filter
+     *
+     * @return string|Savvy_ObjectProxy
+     */
+    public function filterVar($var)
+    {
+        switch (gettype($var)) {
+        case 'object':
+            if ($var instanceof ArrayIterator) {
+                return new Savvy_ObjectProxy_ArrayIterator($var, $this);
+            }
+            if ($var instanceof ArrayAccess) {
+                return new Savvy_ObjectProxy_ArrayAccess($var, $this);
+            }
+
+            return Savvy_ObjectProxy::factory($var, $this);
+        case 'string':
+        case 'int':
+        case 'double':
+            return $this->escape($var);
+        case 'array':
+            return new Savvy_ObjectProxy_ArrayObject(
+                new \ArrayObject($var),
+                $this
+            );
+        }
+
+        return $value;
     }
 
     /**

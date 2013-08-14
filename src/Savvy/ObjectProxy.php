@@ -76,28 +76,7 @@ class Savvy_ObjectProxy implements Countable
      */
     protected function filterVar($var)
     {
-        switch (gettype($var)) {
-        case 'object':
-            if ($var instanceof ArrayIterator) {
-                return new Savvy_ObjectProxy_ArrayIterator($var, $this->savvy);
-            }
-            if ($var instanceof ArrayAccess) {
-                return new Savvy_ObjectProxy_ArrayAccess($var, $this->savvy);
-            }
-
-            return self::factory($var, $this->savvy);
-        case 'string':
-        case 'int':
-        case 'double':
-            return $this->savvy->escape($var);
-        case 'array':
-            return new Savvy_ObjectProxy_ArrayObject(
-                new \ArrayObject($var),
-                $this->savvy
-            );
-        }
-
-        return $var;
+        return $this->savvy->filterVar($var);
     }
 
     /**
