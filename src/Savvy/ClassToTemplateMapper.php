@@ -10,7 +10,7 @@
  * @copyright 2010 Brett Bieber
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   SVN: $Id$
- * @link      http://svn.php.net/repository/pear2/Savvy
+ * @link      https://github.com/saltybeagle/savvy
  */
 
 /**
@@ -24,7 +24,7 @@
  * @author    Brett Bieber <saltybeagle@php.net>
  * @copyright 2010 Brett Bieber
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @link      http://svn.php.net/repository/pear2/Savvy
+ * @link      https://github.com/saltybeagle/savvy
  */
 class Savvy_ClassToTemplateMapper implements Savvy_MapperInterface
 {
