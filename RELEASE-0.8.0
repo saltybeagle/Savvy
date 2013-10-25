@@ -1,0 +1,3 @@
+Feature Release:
+* Add a config option for iterating over escaped Traversable objects
+ iterate_traversable (defaults to false)
