@@ -39,7 +39,7 @@ class Savvy
         'compiler'      => null,
         'filters'       => array(),
         'escape'        => null,
-        'iterate_Traversable' => false,
+        'iterate_traversable' => false,
     );
 
     /**
@@ -143,8 +143,8 @@ class Savvy
         }
 
         // set whether to iterate over Traversable objects
-        if (isset($config['iterate_Traversable'])) {
-            $this->setIterateTraversable($config['iterate_Traversable']);
+        if (isset($config['iterate_traversable'])) {
+            $this->setIterateTraversable($config['iterate_traversable']);
         }
     }
 
@@ -461,14 +461,14 @@ class Savvy
 
     public function setIterateTraversable($iterate)
     {
-        $this->__config['iterate_Traversable'] = (bool)$iterate;
+        $this->__config['iterate_traversable'] = (bool)$iterate;
 
         return $this;
     }
 
     public function getIterateTraversable()
     {
-        return $this->__config['iterate_Traversable'];
+        return $this->__config['iterate_traversable'];
     }
 
     // -----------------------------------------------------------------
@@ -869,7 +869,7 @@ class Savvy
             }
 
             if ($object instanceof Traversable
-                && $this->__config['iterate_Traversable']
+                && $this->__config['iterate_traversable']
                 ) {
                 return $this->renderTraversable($object->getRawObject(), $template);
             }
