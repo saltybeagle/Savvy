@@ -39,6 +39,7 @@ class Savvy
         'compiler'      => null,
         'filters'       => array(),
         'escape'        => null,
+        'iterate_Traversable' => false,
     );
 
     /**
@@ -139,6 +140,11 @@ class Savvy
         // set the default filter callbacks
         if (isset($config['filters'])) {
             $this->addFilters($config['filters']);
+        }
+
+        // set whether to iterate over Traversable objects
+        if (isset($config['iterate_Traversable'])) {
+            $this->setIterateTraversable($config['iterate_Traversable']);
         }
     }
 
@@ -451,6 +457,18 @@ class Savvy
         }
 
         return $this->class_to_template;
+    }
+
+    public function setIterateTraversable($iterate)
+    {
+        $this->__config['iterate_Traversable'] = (bool)$iterate;
+
+        return $this;
+    }
+
+    public function getIterateTraversable()
+    {
+        return $this->__config['iterate_Traversable'];
     }
 
     // -----------------------------------------------------------------
@@ -804,7 +822,7 @@ class Savvy
         return $ret;
     }
 
-    protected function renderArrayAccess(ArrayAccess $array, $template = null)
+    protected function renderTraversable(Traversable $array, $template = null)
     {
         $ret = '';
         foreach ($array as $key => $element) {
@@ -850,8 +868,10 @@ class Savvy
                 $object = Savvy_ObjectProxy::factory($object, $this);
             }
 
-            if ($object instanceof Savvy_ObjectProxy_ArrayIterator) {
-                return $this->renderArrayAccess($object);
+            if ($object instanceof Traversable
+                && $this->__config['iterate_Traversable']
+                ) {
+                return $this->renderTraversable($object->getRawObject(), $template);
             }
         }
 
