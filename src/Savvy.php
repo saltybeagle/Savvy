@@ -36,9 +36,9 @@ class Savvy
     */
 
     protected $__config = array(
-        'compiler'      => null,
-        'filters'       => array(),
-        'escape'        => null,
+        'compiler'            => null,
+        'filters'             => array(),
+        'escape'              => null,
         'iterate_traversable' => false,
     );
 
