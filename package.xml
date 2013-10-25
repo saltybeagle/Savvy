@@ -20,10 +20,10 @@ don't need to learn a new markup system.</description>
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2012-08-20</date>
- <time>10:52:21</time>
+ <date>2013-10-25</date>
+ <time>14:05:02</time>
  <version>
-  <release>0.7.3</release>
+  <release>0.8.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -31,10 +31,9 @@ don't need to learn a new markup system.</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Improve support for proxying arrays:
-
-* Objects which implement ArrayIterator are now proxied using a compatible object
-* Ensure keys are proxied when returned from ArrayObject
+ <notes>Feature Release:
+* Add a config option for iterating over escaped Traversable objects
+ iterate_traversable (defaults to false)
 
 
 Package Savvy API release notes for version 0.1.0.</notes>
@@ -81,8 +80,11 @@ Package Savvy API release notes for version 0.1.0.</notes>
    </dir>
    <dir name="tests" baseinstalldir="/">
     <dir name="escape">
+     <file role="test" name="ArrayAccess.phpt"/>
+     <file role="test" name="ArrayAccessObject.tpl.php"/>
      <file role="test" name="echostring.tpl.php"/>
      <file role="test" name="Foo.tpl.php"/>
+     <file role="test" name="IterateArrayAccess.phpt"/>
      <file role="test" name="object.phpt"/>
      <file role="test" name="raw.tpl.php"/>
      <file role="test" name="string.phpt"/>
