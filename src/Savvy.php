@@ -324,7 +324,7 @@ class Savvy
 
             return Savvy_ObjectProxy::factory($var, $this);
         case 'string':
-        case 'int':
+        case 'integer':
         case 'double':
             return $this->escape($var);
         case 'array':
@@ -334,7 +334,7 @@ class Savvy
             );
         }
 
-        return $value;
+        return $var;
     }
 
     /**
