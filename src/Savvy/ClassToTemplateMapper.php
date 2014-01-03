@@ -82,7 +82,7 @@ class Savvy_ClassToTemplateMapper implements Savvy_MapperInterface
      *
      * @return string Template file name
      */
-    function map($class)
+    public function map($class)
     {
         if (isset(self::$output_template[$class])) {
             $class = self::$output_template[$class];
