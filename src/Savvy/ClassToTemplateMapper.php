@@ -66,13 +66,17 @@ class Savvy_ClassToTemplateMapper implements Savvy_MapperInterface
     /**
      * Maps class names to template filenames.
      *
-     * Underscores and namespace separators in class names are replaced with
+     * This maps according to the PSR-0 standard -- 
+     * https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+     * 
+     * Underscores in the class name and namespace separators are replaced with
      * directory separators.
      *
      * Examples:
      * Class           => Class.tpl.php
      * Other_Class     => Other/Class.tpl.php
      * namespace\Class => namespace/Class.tpl.php
+     * name_space\Other_Class => name_space/Other/Class.tpl.php
      *
      * @param string $class Class name to map to a template
      *
@@ -84,17 +88,18 @@ class Savvy_ClassToTemplateMapper implements Savvy_MapperInterface
             $class = self::$output_template[$class];
         }
 
-        $class = str_replace(array(self::$classname_replacement,
-                                   self::$directory_separator,
-                                   '\\'),
-                             array('',
-                                   DIRECTORY_SEPARATOR,
-                                   DIRECTORY_SEPARATOR),
-                             $class);
+        $className = ltrim($class, '\\');
+        $fileName  = '';
+        $namespace = '';
+        if ($lastNsPos = strrpos($className, '\\')) {
+            $namespace = substr($className, 0, $lastNsPos);
+            $className = substr($className, $lastNsPos + 1);
+            $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+        }
 
-        $templatefile = $class . self::$template_extension;
+        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . self::$template_extension;
 
-        return $templatefile;
+        return $fileName;
     }
 
 }
