@@ -1,5 +1,6 @@
 {
     "name": "saltybeagle/savvy",
+    "description": "Savvy is a powerful but lightweight object-oriented template system for PHP.",
     "autoload": {
         "psr-0": { "Savvy": "src/" }
     }
