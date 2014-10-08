@@ -88,16 +88,17 @@ class Savvy_ClassToTemplateMapper implements Savvy_MapperInterface
             $class = self::$output_template[$class];
         }
 
+        $class = str_replace(self::$classname_replacement, '', $class);
+
         $className = ltrim($class, '\\');
         $fileName  = '';
-        $namespace = '';
         if ($lastNsPos = strrpos($className, '\\')) {
             $namespace = substr($className, 0, $lastNsPos);
             $className = substr($className, $lastNsPos + 1);
             $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
         }
 
-        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . self::$template_extension;
+        $fileName .= str_replace(self::$directory_separator, DIRECTORY_SEPARATOR, $className) . self::$template_extension;
 
         return $fileName;
     }
