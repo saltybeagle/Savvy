@@ -97,10 +97,6 @@ class Savvy
      */
     public function __construct($config = null)
     {
-        $savvy = $this;
-
-        $this->selected_controller = 'basic';
-
         // set the default template search path
         if (isset($config['template_path'])) {
             // user-defined dirs
@@ -121,6 +117,8 @@ class Savvy
         if (isset($config['iterate_traversable'])) {
             $this->setIterateTraversable($config['iterate_traversable']);
         }
+
+        $this->selectController();
     }
 
     /**
@@ -362,23 +360,9 @@ class Savvy
     public function setCompiler(Savvy_CompilerInterface $compiler)
     {
         $this->__config['compiler'] = $compiler;
-        if ($compiler instanceof Savvy_FastCompilerInterface) {
-            switch ($this->selected_controller) {
-                case 'basic' :
-                case 'basiccompiled';
-                    $this->selected_controller = 'basicfastcompiled';
-                    break;
-                case 'filter' :
-                case 'filtercompiled' :
-                    $this->selected_controller = 'filterfastcompiled';
-                    break;
-            }
+        $this->selectController();
 
-            return;
-        }
-        if (!strpos($this->selected_controller, 'compiled')) {
-            $this->selected_controller .= 'compiled';
-        }
+        return $this;
     }
 
     /**
@@ -431,6 +415,23 @@ class Savvy
         return $this->__config['iterate_traversable'];
     }
 
+    /**
+     * Check to ensure all given callables are actually callable
+     *
+     * @param Callable[] $callables
+     * @return $this
+     */
+    protected function validateCallbacks($callables)
+    {
+        foreach ($callables as $callable) {
+            if (!is_callable($callable)) {
+                throw new Savvy_UnexpectedValueException('All parameters must be callable');
+            }
+        }
+
+        return $this;
+    }
+
     // -----------------------------------------------------------------
     //
     // Output escaping and management.
@@ -456,7 +457,14 @@ class Savvy
      */
     public function setEscape()
     {
-        $this->__config['escape'] = @func_get_args();
+        $callables = @func_get_args();
+        if (!$callables) {
+            $this->__config['escape'] = $callables;
+            return $this;
+        }
+
+        $this->validateCallbacks($callables);
+        $this->__config['escape'] = $callables;
 
         return $this;
     }
@@ -482,6 +490,10 @@ class Savvy
      */
     public function escape($var)
     {
+        if (!$this->__config['escape']) {
+            return $var;
+        }
+
         foreach ($this->__config['escape'] as $escape) {
             if (in_array($escape, array('htmlspecialchars', 'htmlentities'), true)) {
                 $var = call_user_func($escape, $var, $this->_escape['quotes'], $this->_escape['charset']);
@@ -625,6 +637,23 @@ class Savvy
     // Template processing
     //
     // -----------------------------------------------------------------
+
+    /**
+     * Return the original object if the given object is a proxy
+     *
+     * @param mixed $object
+     * @return mixed
+     */
+    protected function getRawObject($object)
+    {
+        $rawObject = $object;
+
+        if ($object instanceof Savvy_ObjectProxy) {
+            $rawObject = $object->getRawObject();
+        }
+
+        return $rawObject;
+    }
 
     /**
      * Render context data through a template.
@@ -918,6 +947,32 @@ class Savvy
         }
     }
 
+    /**
+     * Assigns the appropriate output controller state based on current configuration
+     *
+     * @return $this
+     */
+    protected function selectController()
+    {
+        if (!$this->__config['filters']) {
+            $controller = 'basic';
+        } else {
+            $controller = 'filter';
+        }
+
+        $compiler = $this->__config['compiler'];
+        if ($compiler) {
+            if ($compiler instanceof Savvy_FastCompilerInterface) {
+                $controller .= 'Fast';
+            }
+
+            $controller .= 'Compiled';
+        }
+
+        $this->selected_controller = $controller;
+
+        return $this;
+    }
 
     // -----------------------------------------------------------------
     //
@@ -933,12 +988,17 @@ class Savvy
      */
     public function setFilters()
     {
-        $this->__config['filters'] = (array) @func_get_args();
-        if (!$this->__config['filters']) {
-            $this->selected_controller = 'basic';
-        } else {
-            $this->selected_controller = 'filter';
+        $callables = (array) @func_get_args();
+        if (!$callables) {
+            $this->__config['filters'] = array();
+            return $this;
         }
+
+        $this->validateCallbacks($callables);
+        $this->__config['filters'] = $callables;
+        $this->selectController();
+
+        return $this;
     }
 
 
@@ -950,26 +1010,17 @@ class Savvy
      */
     public function addFilters()
     {
-        // add the new filters to the static config variable
-        // via the reference
-        foreach ((array) @func_get_args() as $callback) {
-            $this->__config['filters'][] = $callback;
-            $this->selected_controller = 'filter';
+        $callables = @func_get_args();
+        if (!$callables) {
+            return $this;
         }
+
+        $this->validateCallbacks($callables);
+        $this->__config['filters'] = array_merge($this->__config['filters'], $callables);
+        $this->selectController();
+
+        return $this;
     }
-
-
-    /**
-    *
-    * Runs all filter callbacks on buffered output.
-    *
-    * @access protected
-    *
-    * @param string The template output.
-    *
-    * @return void
-    *
-    */
 
     /**
      * Runs all filter callbacks on buffered output.
@@ -979,6 +1030,10 @@ class Savvy
      */
     public function applyFilters($buffer)
     {
+        if (!$this->__config['filters']) {
+            return $buffer;
+        }
+
         foreach ($this->__config['filters'] as $callback) {
             $buffer = call_user_func($callback, $buffer);
         }
