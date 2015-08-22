@@ -1,19 +1,5 @@
 <?php
 /**
- * Savvy_ClassToTemplateMapper
- *
- * PHP version 5
- *
- * @category  Templates
- * @package   Savvy
- * @author    Brett Bieber <saltybeagle@php.net>
- * @copyright 2010 Brett Bieber
- * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version   SVN: $Id$
- * @link      https://github.com/saltybeagle/savvy
- */
-
-/**
  * Savvy_ClassToTemplateMapper class for Savvy
  *
  * This class allows class names to be mapped to template names though a simple
