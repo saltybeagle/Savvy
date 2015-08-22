@@ -23,6 +23,7 @@ $savvy->setEscape();
 $test->assertEquals('Foo is my class', $savvy->render($object), 'render object');
 
 $test->assertEquals('test', $savvy->render($object, 'echostring.tpl.php'), 'render object with custom template');
+$test->assertEquals('', $savvy->render(null, 'echostring.tpl.php'), 'render null with custom template');
 
 ?>
 ===DONE===
