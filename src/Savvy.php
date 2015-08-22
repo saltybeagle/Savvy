@@ -132,14 +132,16 @@ class Savvy
      * @param Savvy $savvy   The Savvy templating system
      * @return string
      */
-    protected static function basicOutputController($context, $parent, $file, $savvy)
+    protected static function basicOutputController($context, $parent, $file, Savvy $savvy)
     {
-        foreach ($savvy->getGlobals() as $__name => $__value) {
-            $$__name = $__value;
+        try {
+            extract($savvy->getGlobals(true));
+            ob_start();
+            include $file;
+        } catch (Exception $e) {
+            ob_end_clean();
+            throw $e;
         }
-        unset($__name, $__value);
-        ob_start();
-        include $file;
 
         return ob_get_clean();
     }
@@ -153,16 +155,9 @@ class Savvy
      * @param Savvy $savvy   The Savvy templating system
      * @return string
      */
-    protected static function filterOutputController($context, $parent, $file, $savvy)
+    protected static function filterOutputController($context, $parent, $file, Savvy $savvy)
     {
-        foreach ($savvy->getGlobals() as $__name => $__value) {
-            $$__name = $__value;
-        }
-        unset($__name, $__value);
-        ob_start();
-        include $file;
-
-        return $savvy->applyFilters(ob_get_clean());
+        return $savvy->applyFilters(static::basicOutputController($context, $parent, $file, $savvy));
     }
 
     /**
@@ -174,14 +169,16 @@ class Savvy
      * @param Savvy $savvy   The Savvy templating system
      * @return string
      */
-    protected static function basicCompiledOutputController($context, $parent, $file, $savvy)
+    protected static function basicCompiledOutputController($context, $parent, $file, Savvy $savvy)
     {
-        foreach ($savvy->getGlobals() as $__name => $__value) {
-            $$__name = $__value;
+        try {
+            extract($savvy->getGlobals(true));
+            ob_start();
+            include $savvy->template($file);
+        } catch (Exception $e) {
+            ob_end_clean();
+            throw $e;
         }
-        unset($__name, $__value);
-        ob_start();
-        include $savvy->template($file);
 
         return ob_get_clean();
     }
@@ -195,16 +192,9 @@ class Savvy
      * @param Savvy $savvy   The Savvy templating system
      * @return string
      */
-    protected static function filterCompiledOutputController($context, $parent, $file, $savvy)
+    protected static function filterCompiledOutputController($context, $parent, $file, Savvy $savvy)
     {
-        foreach ($savvy->getGlobals() as $__name => $__value) {
-            $$__name = $__value;
-        }
-        unset($__name, $__value);
-        ob_start();
-        include $savvy->template($file);
-
-        return $savvy->applyFilters(ob_get_clean());
+        return $savvy->applyFilters(static::basicCompiledOutputController($context, $parent, $file, $savvy));
     }
 
     /**
@@ -216,8 +206,9 @@ class Savvy
      * @param Savvy $savvy   The Savvy templating system
      * @return string
      */
-    protected static function basicFastCompiledOutputController($context, $parent, $file, $savvy)
+    protected static function basicFastCompiledOutputController($context, $parent, $file, Savvy $savvy)
     {
+        extract($savvy->getGlobals(true));
         return include $savvy->template($file);
     }
 
@@ -230,9 +221,9 @@ class Savvy
      * @param Savvy $savvy   The Savvy templating system
      * @return string
      */
-    protected static function filterFastCompiledOutputController($context, $parent, $file, $savvy)
+    protected static function filterFastCompiledOutputController($context, $parent, $file, Savvy $savvy)
     {
-        return $savvy->applyFilters(include $savvy->template($file));
+        return $savvy->applyFilters(static::filterFastCompiledOutputController($context, $parent, $file, $savvy));
     }
 
     /**
@@ -262,11 +253,6 @@ class Savvy
             case 'savvy':
             case 'this':
                 throw new Savvy_BadMethodCallException('Invalid global variable name');
-        }
-
-        // if output is currently escaped, make sure the global is escaped
-        if ($this->__config['escape']) {
-            $value = $this->filterVar($value);
         }
 
         $this->globals[$name] = $value;
@@ -309,9 +295,19 @@ class Savvy
      *
      * @return array
      */
-    public function getGlobals()
+    public function getGlobals($forOutput = false)
     {
-        return $this->globals;
+        if (!$forOutput || !$this->__config['escape']) {
+            return $this->globals;
+        }
+
+        $outputGlobals = array();
+        foreach ($this->globals as $name => $value) {
+            $value = $this->filterVar($value);
+            $outputGlobals[$name] = $value;
+        }
+
+        return $outputGlobals;
     }
 
     /**
