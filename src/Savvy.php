@@ -265,24 +265,13 @@ class Savvy
     public function filterVar($var)
     {
         switch (gettype($var)) {
-        case 'object':
-            if ($var instanceof ArrayIterator) {
-                return new Savvy_ObjectProxy_ArrayIterator($var, $this);
-            }
-            if ($var instanceof ArrayAccess) {
-                return new Savvy_ObjectProxy_ArrayAccess($var, $this);
-            }
-
-            return Savvy_ObjectProxy::factory($var, $this);
-        case 'string':
-        case 'integer':
-        case 'double':
-            return $this->escape($var);
-        case 'array':
-            return new Savvy_ObjectProxy_ArrayObject(
-                new \ArrayObject($var),
-                $this
-            );
+            case 'array':
+            case 'object':
+                return Savvy_ObjectProxy::factory($var, $this);
+            case 'string':
+            case 'integer':
+            case 'double':
+                return $this->escape($var);
         }
 
         return $var;
@@ -741,17 +730,11 @@ class Savvy
      *
      * @param array  $array    Data to render
      * @param string $template Template to render
-     *
      * @return string Rendered output
      */
     protected function renderArray(array $array, $template = null)
     {
-        $output = '';
-        foreach ($array as $mixed) {
-            $output .= $this->render($mixed, $template);
-        }
-
-        return $output;
+        return $this->renderTraversable($array);
     }
 
     /**
@@ -805,9 +788,9 @@ class Savvy
     public function renderElse($condition, $render, $else, $rendertemplate = null, $elsetemplate = null)
     {
         if ($condition) {
-            $this->render($render, $rendertemplate);
+            return $this->render($render, $rendertemplate);
         } else {
-            $this->render($else, $elsetemplate);
+            return $this->render($else, $elsetemplate);
         }
     }
 
@@ -822,16 +805,17 @@ class Savvy
     protected function renderObject($object, $template = null)
     {
         if ($this->__config['escape']) {
-
             if (!$object instanceof Savvy_ObjectProxy) {
                 $object = Savvy_ObjectProxy::factory($object, $this);
             }
 
-            if ($object instanceof Traversable
-                && $this->__config['iterate_traversable']
-                ) {
+            if ($object instanceof Traversable && $this->__config['iterate_traversable'] ||
+                $object instanceof Savvy_ObjectProxy_ArrayObject
+            ) {
                 return $this->renderTraversable($object->getRawObject(), $template);
             }
+        } elseif ($object instanceof Savvy_ObjectProxy) {
+            $object = $object->getRawObject();
         }
 
         return $this->fetch($object, $template);
