@@ -1,5 +1,5 @@
 <?php
-class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements OuterIterator
+class Savvy_ObjectProxy_TraversableArrayAccess extends Savvy_ObjectProxy_ArrayAccess implements OuterIterator
 {
     protected $innerIterator;
 
@@ -52,10 +52,5 @@ class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements OuterIt
     public function rewind()
     {
         $this->getInnerIterator()->rewind();
-    }
-
-    public function count()
-    {
-        return iterator_count($this->getInnerIterator());
     }
 }

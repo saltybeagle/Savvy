@@ -1,19 +1,5 @@
 <?php
 /**
- * Savvy_ObjectProxy
- *
- * PHP version 5
- *
- * @category  Templates
- * @package   Savvy
- * @author    Brett Bieber <saltybeagle@php.net>
- * @copyright 2010 Brett Bieber
- * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version   SVN: $Id$
- * @link      https://github.com/saltybeagle/savvy
- */
-
-/**
  * ObjectProxy class for Savvy
  *
  * The ObjectProxy acts as an intermediary between an object and a template.
@@ -167,14 +153,29 @@ class Savvy_ObjectProxy implements Countable
      */
     public static function factory($object, $savvy)
     {
-        if ($object instanceof Traversable) {
-            return new Savvy_ObjectProxy_Traversable($object, $savvy);
+        if ($object instanceof self) {
+            return $object;
         }
-        if ($object instanceof ArrayAccess) {
-            return new Savvy_ObjectProxy_ArrayAccess($object, $savvy);
+
+        // special proxy that is always iterated on render (used to proxy scalar arrays)
+        if (is_array($object)) {
+            return new Savvy_ObjectProxy_ArrayObject(new ArrayObject($object), $savvy);
         }
+
         if ($object instanceof ArrayIterator) {
             return new Savvy_ObjectProxy_ArrayIterator($object, $savvy);
+        }
+
+        if ($object instanceof Traversable) {
+            if ($object instanceof ArrayAccess) {
+                return new Savvy_ObjectProxy_TraversableArrayAccess($object, $savvy);
+            }
+
+            return new Savvy_ObjectProxy_Traversable($object, $savvy);
+        }
+
+        if ($object instanceof ArrayAccess) {
+            return new Savvy_ObjectProxy_ArrayAccess($object, $savvy);
         }
 
         return new self($object, $savvy);
