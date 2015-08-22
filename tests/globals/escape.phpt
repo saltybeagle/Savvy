@@ -16,6 +16,10 @@ $savvy->setEscape('myEscape');
 
 $savvy->addGlobal('foo', 'lalalala');
 
+$escaped = $savvy->getGlobals(true);
+
+echo $escaped['foo'];
+
 ?>
 --EXPECT--
-===DONE===
+===DONE===lalalala
