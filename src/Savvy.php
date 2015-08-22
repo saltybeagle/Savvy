@@ -1,19 +1,5 @@
 <?php
 /**
- * Savvy
- *
- * PHP version 5
- *
- * @category  Templates
- * @package   Savvy
- * @author    Brett Bieber <saltybeagle@php.net>
- * @copyright 2010 Brett Bieber
- * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version   SVN: $Id$
- * @link      https://github.com/saltybeagle/savvy
- */
-
-/**
  * Main class for Savvy
  *
  * @category  Templates
@@ -26,19 +12,14 @@
 class Savvy
 {
     /**
-    *
-    * Array of configuration parameters.
-    *
-    * @access protected
-    *
-    * @var array
-    *
-    */
-
+     * Array of configuration parameters.
+     *
+     * @var array
+     */
     protected $__config = array(
-        'compiler'            => null,
-        'filters'             => array(),
-        'escape'              => null,
+        'compiler' => null,
+        'filters' => array(),
+        'escape' => null,
         'iterate_traversable' => false,
     );
 
@@ -50,7 +31,7 @@ class Savvy
     protected $_escape = array(
         'quotes'  => ENT_COMPAT,
         'charset' => 'UTF-8',
-        );
+    );
 
     /**
      * The output template to render using
@@ -91,7 +72,7 @@ class Savvy
     /**
      * How class names are translated to templates
      *
-     * @var MapperInterface
+     * @var Savvy_MapperInterface
      */
     protected $class_to_template;
 
@@ -101,6 +82,7 @@ class Savvy
      * @var array
      */
     protected $globals = array();
+
     // -----------------------------------------------------------------
     //
     // Constructor and magic methods
@@ -108,18 +90,11 @@ class Savvy
     // -----------------------------------------------------------------
 
     /**
-    *
-    * Constructor.
-    *
-    * @access public
-    *
-    * @param array $config An associative array of configuration keys for
-    * the Main object.  Any, or none, of the keys may be set.
-    *
-    * @return Savvy A Savvy instance.
-    *
-    */
-
+     * Constructor.
+     *
+     * @param array $config An associative array of configuration keys for
+     * the Savvy object.  Any, or none, of the keys may be set.
+     */
     public function __construct($config = null)
     {
         $savvy = $this;
@@ -155,7 +130,6 @@ class Savvy
      * @param mixed $parent  Parent template with context and parents $parent->context
      * @param mixed $file    The filename to include
      * @param Savvy $savvy   The Savvy templating system
-     *
      * @return string
      */
     protected static function basicOutputController($context, $parent, $file, $savvy)
@@ -171,13 +145,12 @@ class Savvy
     }
 
     /**
-     * Basic output controller
+     * Filter output controller
      *
      * @param mixed $context The context passed to the template
      * @param mixed $parent  Parent template with context and parents $parent->context
      * @param mixed $file    The filename to include
      * @param Savvy $savvy   The Savvy templating system
-     *
      * @return string
      */
     protected static function filterOutputController($context, $parent, $file, $savvy)
@@ -193,13 +166,12 @@ class Savvy
     }
 
     /**
-     * Basic output controller
+     * Basic Compiled output controller
      *
      * @param mixed $context The context passed to the template
      * @param mixed $parent  Parent template with context and parents $parent->context
      * @param mixed $file    The filename to include
      * @param Savvy $savvy   The Savvy templating system
-     *
      * @return string
      */
     protected static function basicCompiledOutputController($context, $parent, $file, $savvy)
@@ -215,13 +187,12 @@ class Savvy
     }
 
     /**
-     * Basic output controller
+     * Filter Compiled output controller
      *
      * @param mixed $context The context passed to the template
      * @param mixed $parent  Parent template with context and parents $parent->context
      * @param mixed $file    The filename to include
      * @param Savvy $savvy   The Savvy templating system
-     *
      * @return string
      */
     protected static function filterCompiledOutputController($context, $parent, $file, $savvy)
@@ -237,13 +208,12 @@ class Savvy
     }
 
     /**
-     * Basic output controller
+     * Basic Fast Compiled output controller
      *
      * @param mixed $context The context passed to the template
      * @param mixed $parent  Parent template with context and parents $parent->context
      * @param mixed $file    The filename to include
      * @param Savvy $savvy   The Savvy templating system
-     *
      * @return string
      */
     protected static function basicFastCompiledOutputController($context, $parent, $file, $savvy)
@@ -252,13 +222,12 @@ class Savvy
     }
 
     /**
-     * Basic output controller
+     * Filter Fast Compiled output controller
      *
      * @param mixed $context The context passed to the template
      * @param mixed $parent  Parent template with context and parents $parent->context
      * @param mixed $file    The filename to include
      * @param Savvy $savvy   The Savvy templating system
-     *
      * @return string
      */
     protected static function filterFastCompiledOutputController($context, $parent, $file, $savvy)
@@ -268,12 +237,12 @@ class Savvy
 
     /**
      * Add a global variable which will be available inside every template
-     * 
+     *
      * Inside templates, reference the global using the name passed
      * <code>
      * $savvy->addGlobal('formHelper', new FormHelper());
      * </code>
-     * 
+     *
      * Sample template, Form.tpl.php
      * <code>
      * echo $formHelper->renderInput('name');
@@ -281,7 +250,6 @@ class Savvy
      *
      * @param string $var   The global variable name
      * @param mixed  $value The value or variable to expose globally
-     *
      * @return void
      */
     public function addGlobal($name, $value)
@@ -308,7 +276,6 @@ class Savvy
      * Filter a variable of unknown type
      *
      * @param mixed $var The variable to filter
-     *
      * @return string|Savvy_ObjectProxy
      */
     public function filterVar($var)
@@ -364,18 +331,12 @@ class Savvy
     // -----------------------------------------------------------------
 
     /**
-    *
-    * Returns a copy of the Savvy configuration parameters.
-    *
-    * @access public
-    *
-    * @param string $key The specific configuration key to return.  If null,
-    * returns the entire configuration array.
-    *
-    * @return mixed A copy of the $this->__config array.
-    *
-    */
-
+     * Returns a copy of the Savvy configuration parameters.
+     *
+     * @param string $key The specific configuration key to return.  If null,
+     * returns the entire configuration array.
+     * @return mixed A copy of the $this->__config array.
+     */
     public function getConfig($key = null)
     {
         if (is_null($key)) {
@@ -391,22 +352,17 @@ class Savvy
     }
 
     /**
-    *
-    * Sets a custom compiler/pre-processor callback for template sources.
-    *
-    * By default, Savvy does not use a compiler; use this to set your
-    * own custom compiler (pre-processor) for template sources.
-    *
-    * @access public
-    *
-    * @param mixed $compiler A compiler callback value suitable for the
-    * first parameter of call_user_func().  Set to null/false/empty to
-    * use PHP itself as the template markup (i.e., no compiling).
-    *
-    * @return void
-    *
-    */
-
+     * Sets a custom compiler/pre-processor callback for template sources.
+     *
+     * By default, Savvy does not use a compiler; use this to set your
+     * own custom compiler (pre-processor) for template sources.
+     *
+     * @param Savvy_CompilerInterface $compiler A compiler callback value suitable for the
+     * first parameter of call_user_func().  Set to null/false/empty to
+     * use PHP itself as the template markup (i.e., no compiling).
+     * @return $this
+     *
+     */
     public function setCompiler(Savvy_CompilerInterface $compiler)
     {
         $this->__config['compiler'] = $compiler;
@@ -432,11 +388,8 @@ class Savvy
     /**
      * Set the class to template mapper.
      *
-     * @see MapperInterface
-     *
-     * @param MapperInterface $mapper The mapper interface to use
-     *
-     * @return Main
+     * @param Savvy_MapperInterface $mapper The mapper interface to use
+     * @return $this
      */
     public function setClassToTemplateMapper(Savvy_MapperInterface $mapper)
     {
@@ -448,7 +401,7 @@ class Savvy
     /**
      * Get the class to template mapper.
      *
-     * @return MapperInterface
+     * @return Savvy_MapperInterface
      */
     public function getClassToTemplateMapper()
     {
@@ -459,6 +412,12 @@ class Savvy
         return $this->class_to_template;
     }
 
+    /**
+     * Set the configuration flag to enable automatic Traversable rendering
+     *
+     * @param bool $iterate The flag
+     * @return $this
+     */
     public function setIterateTraversable($iterate)
     {
         $this->__config['iterate_traversable'] = (bool)$iterate;
@@ -466,6 +425,11 @@ class Savvy
         return $this;
     }
 
+    /**
+     * Return the configuration flag to enable automatic Traversable rendering
+     *
+     * @return bool
+     */
     public function getIterateTraversable()
     {
         return $this->__config['iterate_traversable'];
@@ -478,27 +442,22 @@ class Savvy
     // -----------------------------------------------------------------
 
     /**
-    *
-    * Clears then sets the callbacks to use when calling $this->escape().
-    *
-    * Each parameter passed to this function is treated as a separate
-    * callback.  For example:
-    *
-    * <code>
-    * $savvy->setEscape(
-    *     'stripslashes',
-    *     'htmlspecialchars',
-    *     array('StaticClass', 'method'),
-    *     array($object, $method)
-    * );
-    * </code>
-    *
-    * @access public
-    *
-    * @return Main
-    *
-    */
-
+     * Clears then sets the callbacks to use when calling $this->escape().
+     *
+     * Each parameter passed to this function is treated as a separate
+     * callback.  For example:
+     *
+     * <code>
+     * $savvy->setEscape(
+     *     'stripslashes',
+     *     'htmlspecialchars',
+     *     array('StaticClass', 'method'),
+     *     array($object, $method)
+     * );
+     * </code>
+     *
+     * @return $this
+     */
     public function setEscape()
     {
         $this->__config['escape'] = @func_get_args();
@@ -507,15 +466,10 @@ class Savvy
     }
 
     /**
-    *
-    * Gets the array of output-escaping callbacks.
-    *
-    * @access public
-    *
-    * @return array The array of output-escaping callbacks.
-    *
-    */
-
+     * Gets the array of output-escaping callbacks.
+     *
+     * @return array The array of output-escaping callbacks.
+     */
     public function getEscape()
     {
         return $this->__config['escape'];
@@ -525,21 +479,16 @@ class Savvy
      * Escapes a value for output in a view script.
      *
      * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
-     * {@link $_encoding} setting.
+     * {@link $_escape} setting.
      *
      * @param mixed $var The output to escape.
-     *
      * @return mixed The escaped value.
      */
     public function escape($var)
     {
         foreach ($this->__config['escape'] as $escape) {
-            if (in_array($escape,
-                    array('htmlspecialchars', 'htmlentities'), true)) {
-                $var = call_user_func($escape,
-                                      $var,
-                                      $this->_escape['quotes'],
-                                      $this->_escape['charset']);
+            if (in_array($escape, array('htmlspecialchars', 'htmlentities'), true)) {
+                $var = call_user_func($escape, $var, $this->_escape['quotes'], $this->_escape['charset']);
             } else {
                 $var = call_user_func($escape, $var);
             }
@@ -565,18 +514,12 @@ class Savvy
     }
 
     /**
-    *
-    * Sets an entire array of search paths for templates or resources.
-    *
-    * @access public
-    *
-    * @param string|array $path The new set of search paths.  If null or
-    * false, resets to the current directory only.
-    *
-    * @return Main
-    *
-    */
-
+     * Sets an entire array of search paths for templates or resources.
+     *
+     * @param string|array $path The new set of search paths.  If null or
+     * false, resets to the current directory only.
+     * @return $this
+     */
     public function setTemplatePath($path = null)
     {
         // clear out the prior search dirs, add default
@@ -589,17 +532,11 @@ class Savvy
     }
 
     /**
-    *
-    * Adds to the search path for templates and resources.
-    *
-    * @access public
-    *
-    * @param string|array $path The directory or stream to search.
-    *
-    * @return Main
-    *
-    */
-
+     * Adds to the search path for templates and resources.
+     *
+     * @param string|array $path The directory or stream to search.
+     * @return $this
+     */
     public function addTemplatePath($path)
     {
         // convert from path string to array of directories
@@ -653,16 +590,12 @@ class Savvy
 
 
     /**
-    *
-    * Searches the directory paths for a given file.
-    *
-    * @param string $file The file name to look for.
-    *
-    * @return string|bool The full path and file name for the target file,
-    * or boolean false if the file is not found in any of the paths.
-    *
-    */
-
+     * Searches the directory paths for a given file.
+     *
+     * @param string $file The file name to look for.
+     * @return string|bool The full path and file name for the target file,
+     * or boolean false if the file is not found in any of the paths.
+     */
     public function findTemplateFile($file)
     {
         if (false !== strpos($file, '..')) {
@@ -717,7 +650,6 @@ class Savvy
      *
      * @param mixed  $mixed    Data to display through the template.
      * @param string $template A template to display data in.
-     *
      * @return string The template output
      */
     public function render($mixed = null, $template = null)
@@ -732,9 +664,7 @@ class Savvy
      *
      * @param resource $resouce  The resources
      * @param string   $template Template
-     *
      * @return void
-     *
      * @throws UnexpectedValueException
      */
     protected function renderResource($resouce, $template = null)
@@ -762,7 +692,6 @@ class Savvy
      *
      * @param string $string   String of data
      * @param string $template A template to display the string in
-     *
      * @return string
      */
     protected function renderString($string, $template = null)
@@ -809,7 +738,6 @@ class Savvy
      * @param array   $array    Associative array of data
      * @param mixed   $selected Optional parameter to pass
      * @param Closure $template A closure that will be called
-     *
      * @return string
      */
     public function renderAssocArray(array $array, $selected = false, Closure $template)
@@ -822,10 +750,17 @@ class Savvy
         return $ret;
     }
 
-    protected function renderTraversable(Traversable $array, $template = null)
+    /**
+     * Render an iterable object/array using the given template
+     *
+     * @param array|Traversable $array Data to render
+     * @param string $template Template to render
+     * @return string
+     */
+    protected function renderTraversable($array, $template = null)
     {
         $ret = '';
-        foreach ($array as $key => $element) {
+        foreach ($array as $element) {
             $ret .= $this->render($element, $template);
         }
 
@@ -840,7 +775,6 @@ class Savvy
      * @param mixed  $else           Context data to render if condition is false
      * @param string $rendertemplate If true, render using this template
      * @param string $elsetemplate   If false, render using this template
-     *
      * @return string
      */
     public function renderElse($condition, $render, $else, $rendertemplate = null, $elsetemplate = null)
@@ -893,6 +827,13 @@ class Savvy
         }
     }
 
+    /**
+     * Renders the given template using the selected output conroller with the given context
+     *
+     * @param mixed $mixed The context for the renered template
+     * @param string $template The template name to find a template file from
+     * @return string
+     */
     protected function fetch($mixed, $template = null)
     {
         if ($template) {
@@ -905,40 +846,54 @@ class Savvy
             }
             $this->template = $this->getClassToTemplateMapper()->map($class);
         }
-        $current          = new stdClass;
-        $current->file    = $this->findTemplateFile($this->template);
-        $current->context = $mixed;
-        $current->parent  = null;
-        if (count($this->templateStack)) {
-            $current->parent = $this->templateStack[count($this->templateStack)-1];
+
+        $current = array(
+            'file' => $this->findTemplateFile($this->template),
+            'context' => $mixed,
+            'parent' => null,
+        );
+
+        $templateStackSize = count($this->templateStack);
+        if ($templateStackSize) {
+            $current['parent'] = $this->templateStack[$templateStackSize - 1];
         }
+
+        $current = (object) $current;
         $this->templateStack[] = $current;
-        $ret = call_user_func(array($this, $this->selected_controller.'OutputController'), $current->context, $current->parent, $current->file, $this);
+
+        try {
+            $ret = call_user_func(
+                array($this, $this->selected_controller.'OutputController'),
+                $current->context,
+                $current->parent,
+                $current->file,
+                $this
+            );
+        } catch (Exception $e) {
+            array_pop($this->templateStack);
+            throw $e;
+        }
+
         array_pop($this->templateStack);
 
         return $ret;
     }
 
     /**
-    *
-    * Compiles a template and returns path to compiled script.
-    *
-    * By default, Savvy does not compile templates, it uses PHP as the
-    * markup language, so the "compiled" template is the same as the source
-    * template.
-    *
-    * If a compiler is specific, this method is used to look up the compiled
-    * template script name
-    *
-    * @param string $tpl The template source name to look for.
-    *
-    * @return string The full path to the compiled template script.
-    *
-    * @throws Savvy_UnexpectedValueException
-    * @throws Savvy_Exception
-    *
-    */
-
+     * Compiles a template and returns path to compiled script.
+     *
+     * By default, Savvy does not compile templates, it uses PHP as the
+     * markup language, so the "compiled" template is the same as the source
+     * template.
+     *
+     * If a compiler is specific, this method is used to look up the compiled
+     * template script name
+     *
+     * @param string $tpl The template source name to look for.
+     * @return string The full path to the compiled template script.
+     * @throws Savvy_UnexpectedValueException
+     * @throws Savvy_Exception
+     */
     public function template($tpl = null)
     {
         // find the template source.
@@ -974,19 +929,12 @@ class Savvy
     //
     // -----------------------------------------------------------------
 
-
     /**
-    *
-    * Resets the filter stack to the provided list of callbacks.
-    *
-    * @access protected
-    *
-    * @param array An array of filter callbacks.
-    *
-    * @return void
-    *
-    */
-
+     * Resets the filter stack to the provided list of callbacks.
+     *
+     * @param array An array of filter callbacks.
+     * @return $this
+     */
     public function setFilters()
     {
         $this->__config['filters'] = (array) @func_get_args();
@@ -999,17 +947,11 @@ class Savvy
 
 
     /**
-    *
-    * Adds filter callbacks to the stack of filters.
-    *
-    * @access protected
-    *
-    * @param array An array of filter callbacks.
-    *
-    * @return void
-    *
-    */
-
+     * Adds filter callbacks to the stack of filters.
+     *
+     * @param array An array of filter callbacks.
+     * @return $this
+     */
     public function addFilters()
     {
         // add the new filters to the static config variable
@@ -1033,6 +975,12 @@ class Savvy
     *
     */
 
+    /**
+     * Runs all filter callbacks on buffered output.
+     *
+     * @param string The template output.
+     * @return string
+     */
     public function applyFilters($buffer)
     {
         foreach ($this->__config['filters'] as $callback) {
