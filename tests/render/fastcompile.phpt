@@ -34,16 +34,14 @@ $test->assertEquals('Foo is my class', $savvy->render($object), 'render object')
 
 $test->assertEquals('test', $savvy->render($object, 'echostring.tpl.php'), 'render object with custom template');
 
+$a = opendir(__DIR__ . DIRECTORY_SEPARATOR . 'compiled');
+while (false !== ($b = readdir($a))) {
+    if (is_dir(__DIR__ . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . $b)) continue;
+    unlink(__DIR__ . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . $b);
+}
+rmdir(__DIR__ . DIRECTORY_SEPARATOR . 'compiled');
+
 ?>
 ===DONE===
---CLEAN--
-<?php
-$a = opendir(__DIR__ . '/compiled');
-while (false !== ($b = readdir($a))) {
-    if (is_dir(__DIR__ . '/compiled/' . $b)) continue;
-    unlink(__DIR__ . '/compiled/' . $b);
-}
-rmdir(__DIR__ . '/compiled');
-?>
 --EXPECT--
 ===DONE===
