@@ -5,7 +5,7 @@ Escaping ArrayAccess
 require dirname(__FILE__) . '/../test_framework.php.inc';
 chdir(__DIR__);
 
-class ArrayAccessObject extends ArrayIterator
+class ArrayAccessObject extends ArrayObject
 {
     function __toString()
     {
@@ -27,7 +27,14 @@ $savvy->setIterateTraversable(false);
 $test->assertEquals(htmlspecialchars((string)$array), $savvy->render($array), 'render ArrayAccess without iterating through template');
 $test->assertEquals(htmlspecialchars((string)$array), $savvy->render($array, 'ArrayAccessObject.tpl.php'), 'render ArrayAccess through template without iterating');
 
+// escaped ArrayObject should remain iterateable
+foreach ($savvy->filterVar($array) as $proxiedValue) {
+	echo $proxiedValue;
+}
+echo "\n";
+
 ?>
 ===DONE===
 --EXPECT--
+&lt;h1&gt;&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;
 ===DONE===
