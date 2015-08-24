@@ -221,7 +221,7 @@ class Savvy
      */
     protected static function filterFastCompiledOutputController($context, $parent, $file, Savvy $savvy)
     {
-        return $savvy->applyFilters(static::filterFastCompiledOutputController($context, $parent, $file, $savvy));
+        return $savvy->applyFilters(static::basicFastCompiledOutputController($context, $parent, $file, $savvy));
     }
 
     /**
@@ -633,7 +633,7 @@ class Savvy
      * @param mixed $object
      * @return mixed
      */
-    protected function getRawObject($object)
+    public function getRawObject($object)
     {
         $rawObject = $object;
 
@@ -738,27 +738,6 @@ class Savvy
     }
 
     /**
-     * Render an associative array of data through a template.
-     *
-     * Three parameters will be passed to the closure, the array key, value,
-     * and selective third parameter.
-     *
-     * @param array   $array    Associative array of data
-     * @param mixed   $selected Optional parameter to pass
-     * @param Closure $template A closure that will be called
-     * @return string
-     */
-    public function renderAssocArray(array $array, $selected = false, Closure $template)
-    {
-        $ret = '';
-        foreach ($array as $key => $element) {
-            $ret .= $template($key, $element, $selected);
-        }
-
-        return $ret;
-    }
-
-    /**
      * Render an iterable object/array using the given template
      *
      * @param array|Traversable $array Data to render
@@ -834,6 +813,8 @@ class Savvy
         if ($template) {
             return $this->fetch(null, $template);
         }
+
+        return '';
     }
 
     /**
@@ -963,6 +944,11 @@ class Savvy
     // Filter management and processing
     //
     // -----------------------------------------------------------------
+
+    public function getFilters()
+    {
+        return $this->__config['filters'];
+    }
 
     /**
      * Resets the filter stack to the provided list of callbacks.
