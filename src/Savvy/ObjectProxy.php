@@ -186,10 +186,11 @@ class Savvy_ObjectProxy implements Countable
         if (method_exists($this->object, '__toString')) {
             return $this->savvy->escape($this->object->__toString());
         }
-        throw new Savvy_BadMethodCallException(
-            'Object of class ' . $this->__getClass()
-            . ' could not be converted to string'
+        trigger_error(
+            'Object of class ' . $this->__getClass() . ' could not be converted to string',
+            E_USER_ERROR
         );
+        return '';
     }
 
     /**
