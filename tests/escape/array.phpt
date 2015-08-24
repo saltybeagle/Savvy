@@ -19,6 +19,10 @@ $array = $savvy->filterVar($array);
 $test->assertEquals(htmlspecialchars($combined_raw_string), $savvy->render($array), 'render array forces iterating through template');
 $test->assertEquals(htmlspecialchars($combined_raw_string), $savvy->render($array, 'ArrayAccessObject.tpl.php'), 'render array through template forces iterating');
 
+try {
+	new Savvy_ObjectProxy_ArrayObject($array, $savvy);
+} catch (UnexpectedValueException $e) {}
+
 ?>
 ===DONE===
 --EXPECT--

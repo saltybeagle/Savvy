@@ -35,6 +35,14 @@ $test->assertEquals($string, $savvy->render($string, 'echostring.tpl.php'), 'ren
 
 $string = '<p></p>';
 $test->assertEquals(htmlspecialchars($string), $savvy->render($string, 'echostring.tpl.php'), 'render string with special chars through template');
+
+try {
+	$savvy->template('doesNotExist.tpl.php');
+} catch (Savvy_TemplateException $e) {}
+
+try {
+	$savvy->findTemplateFile('../doesNotExist.tpl.php');
+} catch (Savvy_UnexpectedValueException $e) {}
 ?>
 ===DONE===
 --EXPECT--
