@@ -110,7 +110,7 @@ class Savvy
 
         // set the default filter callbacks
         if (isset($config['filters'])) {
-            $this->addFilters($config['filters']);
+            $this->setFilters($config['filters']);
         }
 
         // set whether to iterate over Traversable objects
