@@ -17,7 +17,7 @@ class Savvy_ObjectProxy_ArrayObject extends Savvy_ObjectProxy_TraversableArrayAc
     public function __construct($object, $savvy)
     {
         if (!$object instanceof ArrayObject) {
-            throw UnexpectedValueException('$object must be an ArrayObject');
+            throw new Savvy_UnexpectedValueException('$object must be an ArrayObject');
         }
 
         parent::__construct($object, $savvy);

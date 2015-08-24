@@ -6,7 +6,7 @@ class Savvy_ObjectProxy_TraversableArrayAccess extends Savvy_ObjectProxy_ArrayAc
     public function __construct($object, $savvy)
     {
         if (!$object instanceof Traversable) {
-            throw UnexpectedValueException('$object must be traversable');
+            throw new Savvy_UnexpectedValueException('$object must be traversable');
         }
 
         parent::__construct($object, $savvy);
