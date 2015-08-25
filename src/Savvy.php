@@ -31,6 +31,7 @@ class Savvy
     protected $_escape = array(
         'quotes'  => ENT_COMPAT,
         'charset' => 'UTF-8',
+        'double_encode' => false,
     );
 
     /**
@@ -116,6 +117,10 @@ class Savvy
         // set whether to iterate over Traversable objects
         if (isset($config['iterate_traversable'])) {
             $this->setIterateTraversable($config['iterate_traversable']);
+        }
+
+        if (defined('ENT_HTML5')) {
+            $this->_escape['quotes'] |= ENT_HTML5;
         }
 
         $this->selectController();
@@ -266,6 +271,7 @@ class Savvy
     {
         switch (gettype($var)) {
             case 'array':
+                // array will be proxied through special ObjectProxy that supports directly rendering elements through iteration
             case 'object':
                 return Savvy_ObjectProxy::factory($var, $this);
             case 'string':
@@ -275,6 +281,28 @@ class Savvy
         }
 
         return $var;
+    }
+
+    /**
+     * Returns the array with all keys and values (fully recursive) escaped.
+     *
+     * @param array $array
+     * @return array
+     */
+    protected function filterArray(array $array)
+    {
+        $escapedArray = array();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $value = $this->filterArray($value);
+            } else {
+                $value = $this->filterVar($value);
+            }
+
+            $escapedArray[$this->filterVar($key)] = $value;
+        }
+
+        return $escapedArray;
     }
 
     /**
@@ -469,6 +497,36 @@ class Savvy
     }
 
     /**
+     * Changes the default settings used during standard HTML escaping
+     * (htmlentities/htmlspecialchars).
+     *
+     * Currently supported array keys are <code>"quotes"</code> (which maps to the
+     * <code>$flags</code> parameter), <code>"charset"</code> (which maps to
+     * the <code>$encoding</code> parameter) and <code>"double_encoding"</code>
+     * (which maps to the similarly named parameter).
+     *
+     * @param array $settings
+     * @return $this
+     */
+    public function setHTMLEscapeSettings(array $settings)
+    {
+        $this->_escape = array_merge($this->_escape, array_intersect_key($settings, $this->_escape));
+
+        return $this;
+    }
+
+    /**
+     * Returns the current settings used during standard HTML escaping
+     * (htmlentities/htmlspecialchars).
+     *
+     * @return array
+     */
+    public function getHTMLEscapeSettings()
+    {
+        return $this->_escape;
+    }
+
+    /**
      * Escapes a value for output in a view script.
      *
      * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
@@ -485,7 +543,7 @@ class Savvy
 
         foreach ($this->__config['escape'] as $escape) {
             if (in_array($escape, array('htmlspecialchars', 'htmlentities'), true)) {
-                $var = call_user_func($escape, $var, $this->_escape['quotes'], $this->_escape['charset']);
+                $var = call_user_func($escape, $var, $this->_escape['quotes'], $this->_escape['charset'], $this->_escape['double_encode']);
             } else {
                 $var = call_user_func($escape, $var);
             }
@@ -771,6 +829,70 @@ class Savvy
         } else {
             return $this->render($else, $elsetemplate);
         }
+    }
+
+     /**
+      * Render an associative array of data through a template closure/callback.
+      *
+      * Three parameters will be passed to the closure, the array key, value,
+      * and selective third parameter. All will be properly escaped, if so configured.
+      *
+      * @param array   $array    Associative array of data
+      * @param mixed   $selected Optional Parameter to pass
+      * @param Closure $template A closure that will be called
+      * @return string
+      * @throws
+      */
+    public function renderAssocArray(array $array, $selected, Closure $template = null)
+    {
+        // backwards compatible signature where selected is optional
+        if (null === $template) {
+            if ($selected instanceof Closure) {
+                $template = $selected;
+                $selected = false;
+            } else {
+                throw new Savvy_BadMethodCallException('renderAssocArray must be called with a Closure to callback with the rendered array element');
+            }
+        }
+
+        $ret = '';
+        foreach ($array as $key => $element) {
+            $ret .= $this->renderWithCallback($element, $template, $key, $selected);
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Render the given <code>$mixed</code> and pass it to a callback/closure
+     * with escaped <code>$key</code> and <code>$paramToEscape</code>
+     *
+     * @param mixed $mixed
+     * @param Closure $template
+     * @param int|string $key
+     * @param mixed $paramToEscape
+     */
+    public function renderWithCallback($mixed, Closure $template, $key = false, $paramToEscape = false)
+    {
+        if ($this->__config['escape']) {
+            $key = $this->filterVar($key);
+
+            // special handling for arrays, the Closure is probably not expecting a proxy for this scalar
+
+            if (is_array($paramToEscape)) {
+                $paramToEscape = $this->filterArray($paramToEscape);
+            } else {
+                $paramToEscape = $this->filterVar($paramToEscape);
+            }
+
+            if (is_array($mixed)) {
+                $mixed = $this->filterArray($mixed);
+            } else {
+                $mixed = $this->filterVar($mixed);
+            }
+        }
+
+        return $template($key, $mixed, $paramToEscape);
     }
 
     /**
