@@ -14,7 +14,7 @@ $unescaped = array(
 
 $savvy->addGlobal('foo', $unescaped);
 
-$escaped = $savvy->getGlobals();
+$escaped = $savvy->getGlobals(true);
 
 echo $escaped['foo'][0];
 

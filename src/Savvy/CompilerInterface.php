@@ -2,5 +2,5 @@
 
 interface Savvy_CompilerInterface
 {
-    public function compile($savvy, $name);
+    public function compile($name, $savvy);
 }

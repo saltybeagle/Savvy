@@ -1,9 +1,7 @@
 <?php
 $__e = error_reporting();
 error_reporting(E_ERROR|E_NOTICE|E_WARNING);
-require_once dirname(__FILE__) . '/../src/Savvy/Autoload.php';
-$classLoader = new Savvy_Autoload();
-$classLoader->register();
+require_once 'bootstrap.php';
 @include_once 'Text/Diff.php';
 @include_once 'Text/Diff/Renderer.php';
 @include_once 'Text/Diff/Renderer/unified.php';

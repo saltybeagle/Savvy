@@ -1,2 +1,5 @@
 <?php
-class Savvy_BadMethodCallException extends BadMethodCallException implements Savvy_Exception {}
+
+class Savvy_BadMethodCallException extends BadMethodCallException implements Savvy_Exception
+{
+}
