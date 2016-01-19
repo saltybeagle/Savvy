@@ -1,6 +1,18 @@
 {
     "name": "saltybeagle/savvy",
     "description": "Savvy is a powerful but lightweight object-oriented template system for PHP.",
+    "homepage": "http://wdn.unl.edu/",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Brett Bieber (saltybeagle)",
+            "email": "saltybeagle@php.net"
+        },
+        {
+            "name": "Gregory Beaver (cellog)",
+            "email": "cellog@php.net"
+        }
+    ],
     "autoload": {
         "psr-0": { "Savvy": "src/" }
     }
