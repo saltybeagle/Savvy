@@ -1,5 +1,16 @@
 # Savvy Changelog
 
+## 0.9.0
+
+Fixes the following issues:
+
+* An issue occurs when an exception is thrown during inside a template which causes output buffers to remain open and the template stack to be left in an unexpected state.
+* Traversable objects with array access are not able to be iterated when proxied
+* Scalar arrays could not be rendered unless an ArrayObject template existed
+* renderElse API method never returned content
+* Library API is not fully covered by tests
+
+
 ## 0.8.0
 
 Feature Release:
