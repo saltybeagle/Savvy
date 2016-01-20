@@ -1,3 +1,0 @@
-Feature Release
-* Allow direct access to the raw object when escaping. $context->getRawObject()
-* Implement Countable interface for auto-escaped context. count($context);

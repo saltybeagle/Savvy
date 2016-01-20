@@ -56,6 +56,10 @@ class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements OuterIt
 
     public function count()
     {
+        if ($this->getInnerIterator() instanceof Countable) {
+            return count($this->getInnerIterator());
+        }
+
         return iterator_count($this->getInnerIterator());
     }
 }
