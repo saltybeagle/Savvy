@@ -20,7 +20,7 @@ class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements OuterIt
      * @inheritDoc
      * @return Iterator
      */
-    public function getInnerIterator()
+    public function getInnerIterator():?Iterator
     {
         if ($this->innerIterator) {
             return $this->innerIterator;
@@ -29,32 +29,34 @@ class Savvy_ObjectProxy_Traversable extends Savvy_ObjectProxy implements OuterIt
         return $this->object;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->filterVar($this->getInnerIterator()->current());
     }
 
-    public function next()
+    public function next():void
     {
         $this->getInnerIterator()->next();
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->filterVar($this->getInnerIterator()->key());
     }
 
-    public function valid()
+    public function valid():bool
     {
         return $this->getInnerIterator()->valid();
     }
 
-    public function rewind()
+    public function rewind():bool
     {
         $this->getInnerIterator()->rewind();
     }
 
-    public function count()
+    public function count():int
     {
         if ($this->getInnerIterator() instanceof Countable) {
             return count($this->getInnerIterator());
