@@ -15,6 +15,7 @@ class Savvy_ObjectProxy_ArrayIterator extends Savvy_ObjectProxy_TraversableArray
         parent::__construct($array, $savvy);
     }
 
+    #[\ReturnTypeWillChange]
     public function seek($offset)
     {
         return $this->getInnerIterator()->seek($offset);
